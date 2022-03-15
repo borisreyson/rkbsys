@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>qr scanner</title>
+<script type="text/javascript" src="grid.js"></script>
+<script type="text/javascript" src="version.js"></script>
+<script type="text/javascript" src="detector.js"></script>
+<script type="text/javascript" src="formatinf.js"></script>
+<script type="text/javascript" src="errorlevel.js"></script>
+<script type="text/javascript" src="bitmat.js"></script>
+<script type="text/javascript" src="datablock.js"></script>
+<script type="text/javascript" src="bmparser.js"></script>
+<script type="text/javascript" src="datamask.js"></script>
+<script type="text/javascript" src="rsdecoder.js"></script>
+<script type="text/javascript" src="gf256poly.js"></script>
+<script type="text/javascript" src="gf256.js"></script>
+<script type="text/javascript" src="decoder.js"></script>
+<script type="text/javascript" src="qrcode.js"></script>
+<script type="text/javascript" src="findpat.js"></script>
+<script type="text/javascript" src="alignpat.js"></script>
+<script type="text/javascript" src="databr.js"></script>
+<script>
+	function runSCANNER(){
+		/* Ask for "environnement" (rear) camera if available (mobile), will fallback to only available otherwise (desktop).
+   * User will be prompted if (s)he allows camera to be started */
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false }).then(function(stream) {
+    var video = document.getElementById("video-preview");
+    var qrCanvasElement         = document.getElementById("qr-canvas");
+    video.srcObject = stream;
+    video.setAttribute("playsinline", true); /* otherwise iOS safari starts fullscreen */
+    video.play();
+    setTimeout(tick, 100); /* We launch the tick function 100ms later (see next step) */
+    video.classList.remove("hidden");
+    qrCanvasElement.classList.add("hidden");
+  })
+  .catch(function(err) {
+    console.log(err); /* User probably refused to grant access*/
+  });
+	}
+	window.onload =  runSCANNER();
+	function klik(){
+		runSCANNER();
+
+	}
+function tick() {
+  var video                   = document.getElementById("video-preview");
+  var qrCanvasElement         = document.getElementById("qr-canvas");
+  var qrCanvas                = qrCanvasElement.getContext("2d");
+  var data_id         			= document.getElementById("data_id");
+  var width, height;
+
+  if (video.readyState === video.HAVE_ENOUGH_DATA) {
+    qrCanvasElement.height  = video.videoHeight;
+    qrCanvasElement.width   = video.videoWidth;
+    qrCanvas.drawImage(video, 0, 0, qrCanvasElement.width, qrCanvasElement.height);
+    try {
+      var result = qrcode.decode();
+      console.log(result);
+      data_id.innerHTML=result;
+
+      /* Video can now be stopped */
+      video.pause();
+      video.src = "";
+      video.srcObject.getVideoTracks().forEach(track => track.stop());
+
+      /* Display Canvas and hide video stream */
+      qrCanvasElement.classList.remove("hidden");
+      video.classList.add("hidden");
+    } catch(e) {
+      /* No Op */
+    }
+  }
+
+  /* If no QR could be decoded from image copied in canvas */
+  if (!video.classList.contains("hidden"))
+    setTimeout(tick, 100);
+}
+</script>
+<style>
+	.hidden{
+		display: none;
+	}
+</style>
+</head>
+<body>
+<div class="video-container">
+  <video id="video-preview"></video>
+  <canvas id="qr-canvas" class="hidden" ></canvas>
+  
+  <button id="doScan" onclick="klik()">Start Scan</button>
+  <div id="data_id"></div>
+</div>
+</body>
+</html>
