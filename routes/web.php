@@ -819,7 +819,7 @@ Route::get("/contact",function(){
 <center>
 <p>Aplikasi ini dibuat untuk kebutuhan perusahaan PT. Alamjaya Bara Pratama, dan di kelola langsung oleh IT Developer dari Perusahaan tersebut. tidak untuk komersil tapi sebagai alat bantu dalam pekerjaan.</p>
 
-		<p>Jika ada pertanyaan dan masukan dapat menghubungi ke email : 
+		<p>Jika ada pertanyaan dan masukan dapat menghubungi ke email :
 		<br>
 		<br>
 		<a href='https://bit.ly/2KPqBOa'><img src='".url('/mail.png')."' width='90px'></a>
@@ -831,10 +831,16 @@ Route::get("/contact",function(){
 </html>
 	";
 });
-
+Route::get("/flutter/get/last/absen",
+					[ 'uses'=>'flutter\FlutterController@lastAbsen',
+						"alias" => 'flutter.user.lastAbsen'
+					]);
 
 
 Route::get("/mailto",function(){
 	return redirect('mailto:admin.it@abpenergy.co.id');
 });
-
+Route::get('/cek/server',
+                        function(){
+													return ["success"=>true];
+												});

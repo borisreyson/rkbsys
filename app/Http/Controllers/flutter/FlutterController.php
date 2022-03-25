@@ -196,13 +196,42 @@ class FlutterController extends Controller
         if(isset($last)){
           if(isset($lastNew)){
             if(isset($roster)){
-              return array("idRoster"=>$idRoster,"kodeRoster"=>$kodeRoster,"tglRoster"=>$tglRoster,"jamKerja"=>$jamKerja,
-                            "lastAbsen"=>$last->status,"lastNew"=>$lastNew->status,"tanggal"=>$lastNew->tanggal,"masuk"=>$roster->masuk,"pulang"=>$roster->pulang,"presensiMasuk"=>$presensiMasuk,"presensiPulang"=>$presensiPulang);
+              return array("idRoster"=>$idRoster,
+              "kodeRoster"=>$kodeRoster,
+              "tglRoster"=>$tglRoster,
+              "jamKerja"=>$jamKerja,
+              "lastAbsen"=>$last->status,
+              "lastNew"=>$lastNew->status,
+              "tanggal"=>$lastNew->tanggal,
+              "masuk"=>$roster->masuk,
+              "pulang"=>$roster->pulang,
+              "presensiMasuk"=>$presensiMasuk,
+              "presensiPulang"=>$presensiPulang,
+              "jam_server"=>array("jam"=>date("H"),"menit"=>date("i"),"detik"=>date("s")));
             }else{
-              return array("idRoster"=>$idRoster,"kodeRoster"=>$kodeRoster,"tglRoster"=>$tglRoster,"jamKerja"=>$jamKerja,"lastAbsen"=>$last->status,"lastNew"=>$lastNew->status,"masuk"=>null,"pulang"=>null);
+              return array("idRoster"=>$idRoster,
+              "kodeRoster"=>$kodeRoster,
+              "tglRoster"=>$tglRoster,
+              "jamKerja"=>$jamKerja,
+              "lastAbsen"=>$last->status,
+              "lastNew"=>$lastNew->status,
+              "masuk"=>null,"pulang"=>null,
+              "presensiPulang"=>$presensiPulang,
+              "jam_server"=>array("jam"=>date("H"),"menit"=>date("i"),"detik"=>date("s")));
             }
           }else{
-              return array("idRoster"=>$idRoster,"kodeRoster"=>$kodeRoster,"tglRoster"=>$tglRoster,"jamKerja"=>$jamKerja,"lastAbsen"=>$last->status,"lastNew"=>null,"masuk"=>null,"pulang"=>null,"presensiMasuk"=>null,"presensiPulang"=>null);
+              return array("idRoster"=>$idRoster,
+              "kodeRoster"=>$kodeRoster,
+              "tglRoster"=>$tglRoster,
+              "jamKerja"=>$jamKerja,
+              "lastAbsen"=>$last->status,
+              "lastNew"=>null,
+              "masuk"=>null,
+              "pulang"=>null,
+              "presensiMasuk"=>null,
+              "presensiPulang"=>null,
+              "presensiPulang"=>$presensiPulang,
+              "jam_server"=>array("jam"=>date("H"),"menit"=>date("i"),"detik"=>date("s")));
           }
         }else{
           if(isset($lastNew)){
@@ -212,22 +241,86 @@ class FlutterController extends Controller
               if($pulang<$masuk){
                 $masukNew = date("Y-m-d H:i:s",$masuk);
                 $pulangNew = date("Y-m-d H:i:s",strtotime("+1 day ",$pulang));
-              return array("idRoster"=>$idRoster,"kodeRoster"=>$kodeRoster,"tglRoster"=>$tglRoster,"jamKerja"=>$jamKerja,"lastAbsen"=>null,"lastNew"=>$lastNew->status,"masuk"=>date("H:i:s",$masuk),"pulang"=>$pulangNew,"presensiMasuk"=>$presensiMasuk,"presensiPulang"=>$presensiPulang);
+              return array("idRoster"=>$idRoster,
+                            "kodeRoster"=>$kodeRoster,
+                            "tglRoster"=>$tglRoster,
+                            "jamKerja"=>$jamKerja,
+                            "lastAbsen"=>null,
+                            "lastNew"=>$lastNew->status,
+                            "masuk"=>date("H:i:s",$masuk),
+                            "pulang"=>$pulangNew,
+                            "presensiMasuk"=>$presensiMasuk,
+                            "presensiPulang"=>$presensiPulang,
+                            "presensiPulang"=>$presensiPulang,
+                            "jam_server"=>
+                                          array("jam"=>date("H"),
+                                                "menit"=>date("i"),
+                                                "detik"=>date("s"))
+                          );
               }else{
                 $pulangNew = date("Y-m-d H:i:s",$pulang);
-                return array("idRoster"=>$idRoster,"kodeRoster"=>$kodeRoster,"tglRoster"=>$tglRoster,"jamKerja"=>$jamKerja,"lastAbsen"=>null,"lastNew"=>$lastNew->status,"masuk"=>date("H:i:s",$masuk),"pulang"=>$pulangNew,"presensiMasuk"=>$presensiMasuk,"presensiPulang"=>$presensiPulang);
+                return array("idRoster"=>$idRoster,
+                              "kodeRoster"=>$kodeRoster,
+                              "tglRoster"=>$tglRoster,
+                              "jamKerja"=>$jamKerja,
+                              "lastAbsen"=>null,
+                              "lastNew"=>$lastNew->status,
+                              "masuk"=>date("H:i:s",$masuk),
+                              "pulang"=>$pulangNew,
+                              "presensiMasuk"=>$presensiMasuk,
+                              "presensiPulang"=>$presensiPulang,
+                              "presensiPulang"=>$presensiPulang,
+                              "jam_server"=>array("jam"=>date("H"),
+                              "menit"=>date("i"),
+                              "detik"=>date("s")));
               }
             }else{
               if(isset($lastNew->status)){
-                return array("idRoster"=>$idRoster,"kodeRoster"=>$kodeRoster,"tglRoster"=>$tglRoster,"jamKerja"=>$jamKerja,"lastAbsen"=>null,"lastNew"=>$lastNew->status,"masuk"=>null,"pulang"=>null,"presensiMasuk"=>$presensiMasuk,"presensiPulang"=>$presensiPulang);
+                return array("idRoster"=>$idRoster,
+                              "kodeRoster"=>$kodeRoster,
+                              "tglRoster"=>$tglRoster,
+                              "jamKerja"=>$jamKerja,
+                              "lastAbsen"=>null,
+                              "lastNew"=>$lastNew->status,
+                              "masuk"=>null,
+                              "pulang"=>null,
+                              "presensiMasuk"=>$presensiMasuk,
+                              "presensiPulang"=>$presensiPulang,
+                              "presensiPulang"=>$presensiPulang,
+                              "jam_server"=>array("jam"=>date("H"),
+                              "menit"=>date("i"),"detik"=>date("s")));
               }else{
-                return array("idRoster"=>$idRoster,"kodeRoster"=>$kodeRoster,"tglRoster"=>$tglRoster,"jamKerja"=>$jamKerja,"lastAbsen"=>null,"lastNew"=>null,"masuk"=>null,"pulang"=>null,"presensiMasuk"=>$presensiMasuk,"presensiPulang"=>$presensiPulang);
+                return array("idRoster"=>$idRoster,
+                              "kodeRoster"=>$kodeRoster,
+                              "tglRoster"=>$tglRoster,
+                              "jamKerja"=>$jamKerja,
+                              "lastAbsen"=>null,
+                              "lastNew"=>null,
+                              "masuk"=>null,
+                              "pulang"=>null,
+                              "presensiMasuk"=>$presensiMasuk,
+                              "presensiPulang"=>$presensiPulang,
+                              "presensiPulang"=>$presensiPulang,
+                              "jam_server"=>array("jam"=>date("H"),
+                              "menit"=>date("i"),
+                              "detik"=>date("s")));
               }
 
             }
 
         }else{
-          return array("idRoster"=>null,"kodeRoster"=>null,"tglRoster"=>null,"jamKerja"=>null,"lastAbsen"=>null,"lastNew"=>null,"masuk"=>null,"pulang"=>null,"presensiMasuk"=>null,"presensiPulang"=>null);
+          return array("idRoster"=>null,
+          "kodeRoster"=>null,
+          "tglRoster"=>null,
+          "jamKerja"=>null,
+          "lastAbsen"=>null,
+          "lastNew"=>null,
+          "masuk"=>null,
+          "pulang"=>null,
+          "presensiMasuk"=>null,
+          "presensiPulang"=>null,
+          "presensiPulang"=>$presensiPulang,
+          "jam_server"=>array("jam"=>date("H"),"menit"=>date("i"),"detik"=>date("s")));
         }
 
         }
@@ -237,7 +330,7 @@ class FlutterController extends Controller
         $in = DB::table("hse.message_info")->insert([
                                                       "judul"=>$request->judul,
                                                       "pesan"=>$request->pesan,
-                                                      "tgl"=>date("Y-m-d"),
+                                                      "tgl"=>($request->tgl)?date("Y-m-d",strtotime($request->tgl)):date("Y-m-d"),
                                                       ]);
         if($in>0){
           return ["success"=>true];
@@ -263,7 +356,7 @@ class FlutterController extends Controller
         ->update([
           "judul"=>$request->judul,
           "pesan"=>$request->pesan,
-          "tgl"=>date("Y-m-d"),
+          "tgl"=>($request->tgl)?date("Y-m-d",strtotime($request->tgl)):date("Y-m-d"),
         ]);
         if($in){
           return ["success"=>true,"data"=>$request->id_info];

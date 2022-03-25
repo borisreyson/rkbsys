@@ -111,5 +111,6 @@ Route::middleware('api')->delete('/save/buletin',
                             "alias" => 'flutter.deleteBuletin'
                         ]);
 
+
 };
 Route::domain('lp.abpjobsite.com')->group($masterDomain);
