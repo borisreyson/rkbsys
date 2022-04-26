@@ -16,7 +16,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
 
 class absenController extends Controller
-{    
+{
     private $user;
     public function __construct()
     {
@@ -49,7 +49,7 @@ class absenController extends Controller
             $split = explode('-', $tanggal);
             return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
           }
-    Public function getOS() { 
+    Public function getOS() {
 
         $os_platform  = "Unknown OS Platform";
 
@@ -110,7 +110,7 @@ class absenController extends Controller
         return $browser;
     }
     public function absenUserHGE(Request $requset)
-    {        
+    {
         if(!isset($_SESSION['username'])) return redirect('/');
         $nik="";
         $status="";
@@ -149,7 +149,7 @@ class absenController extends Controller
                 ->orderBy("absensi.ceklog.tanggal",'asc')
                 ->paginate(10);
         $db_karyawanHGE = DB::table("db_karyawan.data_karyawan")->where("db_karyawan.data_karyawan.departemen","hrga")->get();
-        return view('absen.absen',["dataAbsen"=>$data,"getUser"=>$this->user,"kar_HGE"=>$db_karyawanHGE,"dept"=>"hrga"]); 
+        return view('absen.absen',["dataAbsen"=>$data,"getUser"=>$this->user,"kar_HGE"=>$db_karyawanHGE,"dept"=>"hrga"]);
 
     }
     public function absenUserHSE(Request $requset)
@@ -192,7 +192,7 @@ if(!isset($_SESSION['username'])) return redirect('/');
                 ->orderBy("absensi.ceklog.tanggal",'asc')
                 ->paginate(10);
         $db_karyawanHGE = DB::table("db_karyawan.data_karyawan")->where("db_karyawan.data_karyawan.departemen","hse")->get();
-        return view('absen.absen',["dataAbsen"=>$data,"getUser"=>$this->user,"kar_HGE"=>$db_karyawanHGE,"dept"=>"hse"]); 
+        return view('absen.absen',["dataAbsen"=>$data,"getUser"=>$this->user,"kar_HGE"=>$db_karyawanHGE,"dept"=>"hse"]);
     }
     public function absenUserENP(Request $requset)
     {
@@ -234,7 +234,7 @@ if(!isset($_SESSION['username'])) return redirect('/');
                     ->orderBy("absensi.ceklog.tanggal",'asc')
                     ->paginate(10);
             $db_karyawanHGE = DB::table("db_karyawan.data_karyawan")->where("db_karyawan.data_karyawan.departemen","enp")->get();
-            return view('absen.absen',["dataAbsen"=>$data,"getUser"=>$this->user,"kar_HGE"=>$db_karyawanHGE,"dept"=>"enp"]); 
+            return view('absen.absen',["dataAbsen"=>$data,"getUser"=>$this->user,"kar_HGE"=>$db_karyawanHGE,"dept"=>"enp"]);
     }
 
     public function absenUserMANAGEMENT(Request $requset)
@@ -277,10 +277,10 @@ if(!isset($_SESSION['username'])) return redirect('/');
                     ->orderBy("absensi.ceklog.tanggal",'asc')
                     ->paginate(10);
             $db_karyawanHGE = DB::table("db_karyawan.data_karyawan")->where("db_karyawan.data_karyawan.departemen","Management")->get();
-            return view('absen.absen',["dataAbsen"=>$data,"getUser"=>$this->user,"kar_HGE"=>$db_karyawanHGE,"dept"=>"Management"]); 
+            return view('absen.absen',["dataAbsen"=>$data,"getUser"=>$this->user,"kar_HGE"=>$db_karyawanHGE,"dept"=>"Management"]);
     }
 
-    
+
     public function absenUserMTK(Request $requset)
     {
     if(!isset($_SESSION['username'])) return redirect('/');
@@ -321,7 +321,7 @@ if(!isset($_SESSION['username'])) return redirect('/');
                     ->orderBy("absensi.ceklog.tanggal",'asc')
                     ->paginate(10);
             $db_karyawanHGE = DB::table("db_karyawan.data_karyawan")->where("db_karyawan.data_karyawan.departemen","MTK")->get();
-            return view('absen.absen',["dataAbsen"=>$data,"getUser"=>$this->user,"kar_HGE"=>$db_karyawanHGE,"dept"=>"MTK"]); 
+            return view('absen.absen',["dataAbsen"=>$data,"getUser"=>$this->user,"kar_HGE"=>$db_karyawanHGE,"dept"=>"MTK"]);
     }
     public function absenError(Request $request)
     {
@@ -365,7 +365,7 @@ if(!isset($_SESSION['username'])) return redirect('/');
                     ->paginate(10);
                     // dd($data);
             $db_karyawanHGE = DB::table("db_karyawan.data_karyawan")->where("db_karyawan.data_karyawan.departemen","MTK")->get();
-            return view('absen.error',["dataAbsen"=>$data,"getUser"=>$this->user,"kar_HGE"=>$db_karyawanHGE,"dept"=>"MTK"]); 
+            return view('absen.error',["dataAbsen"=>$data,"getUser"=>$this->user,"kar_HGE"=>$db_karyawanHGE,"dept"=>"MTK"]);
     }
 
     public function absenKTTHGE(Request $requset)
@@ -393,8 +393,8 @@ if(!isset($_SESSION['username'])) return redirect('/');
 
     }
     public function rekapAbsen(Request $request)
-    {       
-        if(!isset($_SESSION['username'])) return redirect('/');   
+    {
+        if(!isset($_SESSION['username'])) return redirect('/');
         $start = strtotime(date("Y-m-d"));
         $end = strtotime(date("Y-m-d"));
         if(isset($_GET['dari'])){
@@ -409,9 +409,9 @@ if(!isset($_SESSION['username'])) return redirect('/');
           $hal = 3;
         }
         if($_SESSION['department']=="mtk"){
-          $dept = DB::table("department")->where("id_dept","mtk")->get(); 
+          $dept = DB::table("department")->where("id_dept","mtk")->get();
         }else{
-          $dept = DB::table("department")->get();     
+          $dept = DB::table("department")->get();
         }
         $dbKaryawan = DB::table("db_karyawan.data_karyawan")->where("flag",0);
         $vRoster = DB::table("absensi.view_roster");
@@ -425,13 +425,13 @@ if(!isset($_SESSION['username'])) return redirect('/');
             }else{
             $filter = $dbKaryawan->where("db_karyawan.data_karyawan.departemen",$_GET['dept']);
             $viewFilter = $vRoster->where("departemen",$_GET['dept']);
-            $ceklogFilter = $vCeklog->where("departemen",$_GET['dept']); 
+            $ceklogFilter = $vCeklog->where("departemen",$_GET['dept']);
             }
           }else{
             $filter = $dbKaryawan;
             $viewFilter = $vRoster;
             $ceklogFilter = $vCeklog;
-          } 
+          }
           if(isset($_GET['search'])){
             $filter1 = $filter->whereRaw("db_karyawan.data_karyawan.nik like '%".$_GET['search']."%' or db_karyawan.data_karyawan.nama like '%".$_GET['search']."%'");
             $viewFilter1 = $viewFilter->whereRaw("nrp like '%".$_GET['search']."%' or nama like '%".$_GET['search']."%'");
@@ -453,20 +453,83 @@ if(!isset($_SESSION['username'])) return redirect('/');
           "dept"=>$dept,
           "rosterTB"=>$rosterTB,
           "ceklogTB"=>$ceklogTB
-        ]); 
+        ]);
 
     }
+    public function rekapAbsenNew(Request $request)
+    {
+        if(!isset($_SESSION['username'])) return redirect('/');
+        $start = strtotime(date("Y-m-d"));
+        $end = strtotime(date("Y-m-d"));
+        if(isset($_GET['dari'])){
+          $start = strtotime(date("Y-m-d",strtotime($_GET['dari'])));
+        }
+        if(isset($_GET['sampai'])){
+          $end = strtotime(date("Y-m-d",strtotime($_GET['sampai'])));
+        }
+        if(isset($request->jml_perhalaman)){
+          $hal = (int) $request->jml_perhalaman;
+        }else{
+          $hal = 3;
+        }
+        if($_SESSION['department']=="mtk"){
+          $dept = DB::table("department")->where("id_dept","mtk")->get();
+        }else{
+          $dept = DB::table("department")->get();
+        }
+        $dbKaryawan = DB::table("db_karyawan.data_karyawan")->where("flag",0);
+        $vRoster = DB::table("absensi.view_roster");
+        $vCeklog = DB::table("absensi.view_ceklog");
+          if(isset($_GET['dept']))
+          {
+            if($_GET['dept']=="error"){
+            $filter = $dbKaryawan;
+            $viewFilter = $vRoster;
+            $ceklogFilter = $vCeklog;
+            }else{
+            $filter = $dbKaryawan->where("db_karyawan.data_karyawan.departemen",$_GET['dept']);
+            $viewFilter = $vRoster->where("departemen",$_GET['dept']);
+            $ceklogFilter = $vCeklog->where("departemen",$_GET['dept']);
+            }
+          }else{
+            $filter = $dbKaryawan;
+            $viewFilter = $vRoster;
+            $ceklogFilter = $vCeklog;
+          }
+          if(isset($_GET['search'])){
+            $filter1 = $filter->whereRaw("db_karyawan.data_karyawan.nik like '%".$_GET['search']."%' or db_karyawan.data_karyawan.nama like '%".$_GET['search']."%'");
+            $viewFilter1 = $viewFilter->whereRaw("nrp like '%".$_GET['search']."%' or nama like '%".$_GET['search']."%'");
+            $ceklogFilter1 = $ceklogFilter->whereRaw("nik like '%".$_GET['search']."%' or nama like '%".$_GET['search']."%'");
+          }else{
+            $filter1 = $filter;
+            $viewFilter1 = $viewFilter;
+            $ceklogFilter1 = $ceklogFilter;
+          }
 
+          $data = $filter1->paginate($hal);
+          $rosterTB = $viewFilter1->whereBetween("tanggal",[date("Y-m-d",$start),date("Y-m-d",$end)])->get();
+          $ceklogTB = $ceklogFilter1->whereBetween("tanggal",[date("Y-m-d",$start),date("Y-m-d",$end)])->orderBy("jam","desc")->get();
+          // dd($data);
+            // dd($ceklogTB);
+
+        return view('absen.rekap_new',["getUser"=>$this->user,
+          "dbKaryawan"=>$data,
+          "dept"=>$dept,
+          "rosterTB"=>$rosterTB,
+          "ceklogTB"=>$ceklogTB
+        ]);
+
+    }
     public function exportRekap(Request $request)
     {
-      if(!isset($_SESSION['username'])) return redirect('/');  
+      if(!isset($_SESSION['username'])) return redirect('/');
 
         $files = glob('export/*');
         foreach($files as $file){
             if(is_file($file)){
                 unlink($file);
             }
-        } 
+        }
 $start = strtotime(date("Y-m-d"));
 $end = strtotime(date("Y-m-d"));
 if(isset($_GET['dari'])){
@@ -488,8 +551,8 @@ if(isset($_GET['sampai'])){
             $filter = $dbKaryawan;
             $filterRoster = $viewRoster;
             $filterCeklog = $viewCeklog;
-          } 
-          $data = $filter->get(); 
+          }
+          $data = $filter->get();
 
           $rosterTB = $filterRoster->whereBetween("tanggal",[date("Y-m-d",$start),date("Y-m-d",$end)])->get();
           $masukTB = $filterCeklog->whereBetween("tanggal",[date("Y-m-d",$start),date("Y-m-d",$end)])->get();
@@ -570,7 +633,7 @@ if(isset($roster->pulang)){
 
   if(strtotime($pulang->jam) < strtotime($roster->pulang)){
 
-$telat[$abc][] = 1;  
+$telat[$abc][] = 1;
 
   }else{
     if($roster->kode_jam=="OFF"){
@@ -595,12 +658,12 @@ $telat[$abc][] = 0;
   ob_end_flush();
         ob_flush();
         flush();
-} 
+}
 ob_end_flush();
         ob_flush();
         flush();
           }
-          
+
             $filename = "export/Export-Rekap-Absen-".date('d F Y').".xlsx";
             $spreadsheet = new Spreadsheet();
             $spreadsheet->getProperties()->setCreator("IT ABP ENERGY");
@@ -641,26 +704,26 @@ foreach($finger as $kF => $vF)
 {
   foreach($vF as $kk => $vv)
   {
-  $sheet->setCellValue($kF.($kk+5), $vv); 
+  $sheet->setCellValue($kF.($kk+5), $vv);
 
     if($flag[$kF][$kk]==1){
       $sheet->getStyle($kF.($kk+5))->getFont()->getColor()->setARGB('FFFFFF');
       $sheet->getStyle($kF.($kk+5))->getFill()
                         ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-                        ->getStartColor()->setARGB('F0160A'); 
+                        ->getStartColor()->setARGB('F0160A');
     }else{
     if($telat[$kF][$kk]==1){
       $sheet->getStyle($kF.($kk+5))->getFont()->getColor()->setARGB('F0160A');
     }else if($telat[$kF][$kk]==2){
       $sheet->getStyle($kF.($kk+5))->getFont()->getColor()->setARGB('2509E6');
-    }  
+    }
     }
 
-    
+
   $sheet->getColumnDimension($kF)->setAutoSize(true);
   // echo $telat[$kF][$kk]."<br>";
   }
-  
+
 }
 
   // die();
@@ -675,7 +738,7 @@ foreach($finger as $kF => $vF)
                         ]);
             if($logExport){
                 return redirect($filename);
-            } 
+            }
     }
     public function absenUserHGEexport(Request $requset)
     {
@@ -689,7 +752,7 @@ foreach($finger as $kF => $vF)
                 unlink($file);
             }
         }
-        
+
         if(isset($requset->status)){
           if($requset->status!="all"){
             $status=$requset->status;
@@ -757,7 +820,7 @@ foreach($finger as $kF => $vF)
             if($logExport){
 
                 return redirect($filename);
-            } 
+            }
     }
 
     public function absenErrorexport(Request $requset)
@@ -772,7 +835,7 @@ foreach($finger as $kF => $vF)
                 unlink($file);
             }
         }
-        
+
         if(isset($requset->status)){
           if($requset->status!="all"){
             $status=$requset->status;
@@ -841,21 +904,21 @@ foreach($finger as $kF => $vF)
             if($logExport){
 
                 return redirect($filename);
-            } 
+            }
     }
 
     public function kodeJamRoster(Request $request)
-    {      
+    {
       if(!isset($_SESSION['username'])) return redirect('/');
               $kodeJam = DB::table('db_karyawan.kode_jam_masuk')
                       ->paginate(10);
               $jamkerja = DB::table('db_karyawan.jam_kerja')
                       ->get();
-              return view('absen.kode_jam',["kodeJam"=>$kodeJam,"jamkerja"=>$jamkerja,"getUser"=>$this->user]); 
+              return view('absen.kode_jam',["kodeJam"=>$kodeJam,"jamkerja"=>$jamkerja,"getUser"=>$this->user]);
     }
     public function kodeJamRosterPut(Request $request)
     {
-      if(!isset($_SESSION['username'])) return redirect('/');   
+      if(!isset($_SESSION['username'])) return redirect('/');
         $file =$_FILES['fileExcel']['name'];
         $tmp_file =$_FILES['fileExcel']['tmp_name'];
         $inputFileType = ucwords(pathinfo($file, PATHINFO_EXTENSION));
@@ -867,12 +930,12 @@ foreach($finger as $kF => $vF)
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
         //dd($sheetData);
         foreach($sheetData as $k => $v){
-                    if($k>1){    
+                    if($k>1){
                     $no = $sheetData[$k]['A'];
-                    $masuk=$sheetData[$k]['B']; 
-                    $pulang=$sheetData[$k]['C'];          
-                        $cek=DB::table("db_karyawan.jam_kerja")->where("no",$no)->count();                        
-                        if($cek==0){                            
+                    $masuk=$sheetData[$k]['B'];
+                    $pulang=$sheetData[$k]['C'];
+                        $cek=DB::table("db_karyawan.jam_kerja")->where("no",$no)->count();
+                        if($cek==0){
                         $in = DB::table("db_karyawan.jam_kerja")->insert([
                                                             "no"=>$no,
                                                             "masuk"=>$masuk,
@@ -884,17 +947,17 @@ foreach($finger as $kF => $vF)
                                                     ->update([
                                                             "masuk"=>$masuk,
                                                             "pulang"=>$pulang,
-                                                            ]);      
+                                                            ]);
                         }
-                     
+
             }
-            
+
         }
         unlink($file);
         return redirect()->back()->with("success","Data Telah Di Proses!");
     }
     public function rosterKerja(Request $request)
-    {      
+    {
       if(!isset($_SESSION['username'])) return redirect('/');
             $sub_bagian = DB::table("db_karyawan.sub_bagian")
                           ->join("department","department.id_dept","db_karyawan.sub_bagian.id_dept")
@@ -905,11 +968,11 @@ foreach($finger as $kF => $vF)
                         ->get();
             $karyawan = DB::table("db_karyawan.data_karyawan")
                         ->join("department","department.id_dept","db_karyawan.data_karyawan.departemen")->get();
-              return view('absen.roster',["sub_bagian"=>$sub_bagian,"karyawan"=>$karyawan,"getUser"=>$this->user,"jamKerja"=>$jamKerja]); 
+              return view('absen.roster',["sub_bagian"=>$sub_bagian,"karyawan"=>$karyawan,"getUser"=>$this->user,"jamKerja"=>$jamKerja]);
     }
 
     public function rosterKerjaLihat(Request $request)
-    {      
+    {
       if(!isset($_SESSION['username'])) return redirect('/');
             $sub_bagian = DB::table("db_karyawan.sub_bagian")
                           ->join("department","department.id_dept","db_karyawan.sub_bagian.id_dept")
@@ -921,11 +984,11 @@ foreach($finger as $kF => $vF)
                         ->join("db_karyawan.jam_kerja","db_karyawan.jam_kerja.no","db_karyawan.kode_jam_masuk.id_jam_kerja")
                         ->get();
 
-              return view('absen.lihat_roster',["sub_bagian"=>$sub_bagian,"jamKerja"=>$jamKerja,"getUser"=>$this->user,"kar"=>$kar]); 
+              return view('absen.lihat_roster',["sub_bagian"=>$sub_bagian,"jamKerja"=>$jamKerja,"getUser"=>$this->user,"kar"=>$kar]);
     }
-    
+
     public function kodeJamRosterPost(Request $request)
-    {      
+    {
       if(!isset($_SESSION['username'])) return redirect('/');
               $kodeJam = DB::table('db_karyawan.kode_jam_masuk')
                       ->insert([
@@ -944,12 +1007,12 @@ foreach($finger as $kF => $vF)
               }
     }
     public function newSub(Request $request)
-    {      
+    {
       if(!isset($_SESSION['username'])) return redirect('/');
-      return view('absen.sub',["getUser"=>$this->user]); 
+      return view('absen.sub',["getUser"=>$this->user]);
     }
     public function newSubPost(Request $request)
-    {      
+    {
       if(!isset($_SESSION['username'])) return redirect('/');
       $cek = DB::table('db_karyawan.sub_bagian')->where("bagian",$request->sub_bagian)->count();
       if($cek<1){
@@ -965,10 +1028,10 @@ foreach($finger as $kF => $vF)
             }else{
               return redirect()->back()->with("failed","Failed!");
             }
-          }else{            
+          }else{
               return redirect()->back()->with("failed","Sub Bagian Sudah Ada!");
           }
-      
+
     }
     public function postRoster(Request $request)
     {
@@ -996,7 +1059,7 @@ foreach($finger as $kF => $vF)
         }
       }
       return redirect()->back()->with("success","Update!");
-            
+
     }
 
     public function updateRoster(Request $request)
@@ -1016,7 +1079,7 @@ foreach($finger as $kF => $vF)
                       ["tanggal",date("Y-m-d",$tgl[$k][$kk])]
                     ])
                     ->update([
-                      "sub_bagian"=>$sub_bagian,                      
+                      "sub_bagian"=>$sub_bagian,
                       "tahun"=>$tahun,
                       "bulan"=>$bulan,
                       "jam_kerja"=>$vv,
@@ -1040,20 +1103,20 @@ foreach($finger as $kF => $vF)
                 ->orderBy("tanggal","desc")
                 ->first();
         $lastNew = DB::table('absensi.ceklog')
-                ->where("nik",$request->nik)                
+                ->where("nik",$request->nik)
                 ->select("absensi.ceklog.*",DB::raw("CONCAT(tanggal,' ',jam) as tanggal_jam"))
                 ->orderBy("tanggal_jam","desc")
                 ->first();
         $presensiMasuk = DB::table('absensi.ceklog')
                 ->where([["nik",$request->nik],["status","Masuk"],
-                  ["tanggal",date("Y-m-d")]])                
+                  ["tanggal",date("Y-m-d")]])
                 ->select("absensi.ceklog.*",DB::raw("CONCAT(tanggal,' ',jam) as tanggal_jam"))
                 ->orderBy("tanggal_jam","desc")
                 ->first();
 
         $presensiPulang = DB::table('absensi.ceklog')
                 ->where([["nik",$request->nik],["status","Pulang"],
-                  ["tanggal",date("Y-m-d")]])                
+                  ["tanggal",date("Y-m-d")]])
                 ->select("absensi.ceklog.*",DB::raw("CONCAT(tanggal,' ',jam) as tanggal_jam"))
                 ->orderBy("tanggal_jam","desc")
                 ->first();
@@ -1098,13 +1161,13 @@ foreach($finger as $kF => $vF)
               }else{
                 return array("lastAbsen"=>null,"lastNew"=>null,"masuk"=>null,"pulang"=>null,"presensiMasuk"=>$presensiMasuk,"presensiPulang"=>$presensiPulang);
               }
-              
+
             }
 
         }else{
           return array("lastAbsen"=>null,"lastNew"=>null,"masuk"=>null,"pulang"=>null,"presensiMasuk"=>null,"presensiPulang"=>null);
         }
-          
+
         }
     }
     public function AbsenTigaHari(Request $request)
@@ -1113,15 +1176,15 @@ foreach($finger as $kF => $vF)
       $dari = date("Y-m-d",strtotime("-3 Day"));
       $sampai = date("Y-m-d");
       $last3 = DB::table('absensi.ceklog')
-                ->where("nik",$request->nik)     
-                ->whereBetween("tanggal",[$dari,$sampai])           
+                ->where("nik",$request->nik)
+                ->whereBetween("tanggal",[$dari,$sampai])
                 ->select("absensi.ceklog.*",DB::raw("CONCAT('".$url."/',absensi.ceklog.nik,'/',gambar) as gambar"),DB::raw("CONCAT(tanggal,' ',jam) as tanggal_jam"))
                 ->orderBy("tanggal_jam","desc")
                 ->get();
                 return ["AbsenTigaHari"=>$last3];
     }
     public function exportJamkerja(Request $request)
-    {      
+    {
         $files = glob('export/*');
         foreach($files as $file){
             if(is_file($file)){
@@ -1160,7 +1223,7 @@ foreach($finger as $kF => $vF)
             if($logExport){
 
                 return redirect($filename);
-            } 
+            }
     }
     public function importRoster(Request $request)
     {
@@ -1185,7 +1248,7 @@ foreach($finger as $kF => $vF)
                   $tgl[]=$value;
                 }
               }else{
-                if($key=="A"){    
+                if($key=="A"){
                   $nik = $value;
                 }else if($key!="A" && $key!="B"){
                   $rs[$nik][]= $value;
@@ -1278,41 +1341,41 @@ return redirect()->back()->with("failed","Periksa Bulan di File Anda");
     }
     function hari_ini(){
       $hari = date ("D");
-     
+
       switch($hari){
         case 'Sun':
           $hari_ini = "Minggu";
         break;
-     
-        case 'Mon':     
+
+        case 'Mon':
           $hari_ini = "Senin";
         break;
-     
+
         case 'Tue':
           $hari_ini = "Selasa";
         break;
-     
+
         case 'Wed':
           $hari_ini = "Rabu";
         break;
-     
+
         case 'Thu':
           $hari_ini = "Kamis";
         break;
-     
+
         case 'Fri':
           $hari_ini = "Jumat";
         break;
-     
+
         case 'Sat':
           $hari_ini = "Sabtu";
         break;
-        
+
         default:
-          $hari_ini = "Tidak di ketahui";   
+          $hari_ini = "Tidak di ketahui";
         break;
       }
-     
+
       return $hari_ini;
   }
     public function faceidTokenNew(Request $request)
@@ -1363,7 +1426,7 @@ return redirect()->back()->with("failed","Periksa Bulan di File Anda");
         ["db_karyawan.roster_kerja.tanggal",date("Y-m-d")]
       ])
       ->get();
-      
+
       if($absensi!=null){
        if($absensi->phone_token==$request->android_token){
           return array("area"=>"abp","jam"=>date("H"),"menit"=>date("i"),"detik"=>date("s"),"absensi"=>$absensi,"hari"=>$hariIni,"tanggal"=>$tglIndo,"roster"=>$roster,"presensi"=>$presensi);
@@ -1374,12 +1437,12 @@ return redirect()->back()->with("failed","Periksa Bulan di File Anda");
           ])->update([
             "phone_token"=>$request->android_token
           ]);
-          return array("area"=>"abp","jam"=>date("H"),"menit"=>date("i"),"detik"=>date("s"),"absensi"=>$absensi,"hari"=>$hariIni,"tanggal"=>$tglIndo,"roster"=>$roster,"presensi"=>$presensi);          
-       } 
+          return array("area"=>"abp","jam"=>date("H"),"menit"=>date("i"),"detik"=>date("s"),"absensi"=>$absensi,"hari"=>$hariIni,"tanggal"=>$tglIndo,"roster"=>$roster,"presensi"=>$presensi);
+       }
      }else{
-          return array("area"=>"abp","jam"=>date("H"),"menit"=>date("i"),"detik"=>date("s"),"absensi"=>$absensi,"hari"=>$hariIni,"tanggal"=>$tglIndo,"roster"=>$roster,"presensi"=>$presensi);  
+          return array("area"=>"abp","jam"=>date("H"),"menit"=>date("i"),"detik"=>date("s"),"absensi"=>$absensi,"hari"=>$hariIni,"tanggal"=>$tglIndo,"roster"=>$roster,"presensi"=>$presensi);
      }
-       
+
     }
     public function updatePhoneToken(Request $request)
     {
@@ -1418,7 +1481,7 @@ return redirect()->back()->with("failed","Periksa Bulan di File Anda");
         $filter = $absensi->where("tanggal",$tanggal);
       }
       $row = $filter
-       ->select("db_karyawan.data_karyawan.*","absensi.ceklog.*",DB::raw("CONCAT('".$url."/',absensi.ceklog.nik,'/',gambar) as gambar")) 
+       ->select("db_karyawan.data_karyawan.*","absensi.ceklog.*",DB::raw("CONCAT('".$url."/',absensi.ceklog.nik,'/',gambar) as gambar"))
       ->orderBy("absensi.ceklog.id","desc")->paginate(10);
       return ($row);
     }
@@ -1658,7 +1721,7 @@ return redirect()->back()->with("failed","Periksa Bulan di File Anda");
       //         //     echo $vN." Failed <br/>";
       //         //   }
       //         // }
-              
+
       //       }
       //     }else{
       //       if(mkdir('face_id/'.$key.'/')){
@@ -1729,7 +1792,7 @@ return redirect()->back()->with("failed","Periksa Bulan di File Anda");
           }else{
             return (array("folder"=>false));
           }
-                 
+
         }else{
           if(mkdir('face_id/recognized/'.$request->nik.'/')){
               if(chmod("face_id/recognized/".$request->nik."/",0777)){
@@ -1745,9 +1808,9 @@ return redirect()->back()->with("failed","Periksa Bulan di File Anda");
           }else{
             return (array("folder"=>false));
           }
-          
+
         }
-        
+
       }
     }
     public function aplMasukan(Request $request)

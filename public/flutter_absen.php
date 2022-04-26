@@ -89,7 +89,12 @@ $sql =  "INSERT INTO ceklog (nik,tanggal,jam,gambar,status,face_id,lupa_absen,la
 $sql =  "INSERT INTO ceklog (nik,tanggal,jam,gambar,status,face_id,lupa_absen,lat,lng,id_roster) VALUES ('".$nik."','".$tglNya."','".date("H:i:s")."','".$urlImg."','".$status."','".$id."','".$lupa_absen."','".$lat."','".$lng."','".$id_roster."')";
 		}
 		if ($koneksi->query($sql) === TRUE) {
-
+				if($status=="Masuk"){
+					$ceklogInsert = "INSERT INTO cekin  (nik,tgl_in,cekin) VALUES ('".$nik."','".date("Y-m-d")."','".date("H:i:s")."')";
+				}else if($status=="Pulang"){
+					$ceklogInsert = "INSERT INTO cekout  (nik,tgl_out,cekout) VALUES ('".$nik."','".date("Y-m-d")."','".date("H:i:s")."')";
+				}
+				$koneksi->query($ceklogInsert);
 		    $res= "The file ".$sql. " has been uploaded. Tidak Dikenal =".$unknown;
 
 			$q = "INSERT INTO error_log (nik,error_result,datelog) VALUES ('".$nik."','".$unknown."','".date("Y-m-d H:i:s")."')";

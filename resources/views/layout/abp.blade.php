@@ -11,11 +11,15 @@
                             </li>
                             @endif
 @if(in_array('barging',$arrRULE))
-                            <li><a href="{{url('/monitoring/form/barging')}}">BARGING</a>
+                            <li><a href="{{url('/monitoring/form/barging')}}">BARGING EXPORT</a>
+                            </li>
+                            <li><a href="{{url('/pln/form/barging')}}">BARGING PLN</a>
                             </li>
                             @endif
 @if(in_array('boat',$arrRULE))
-                            <li><a href="{{url('/monitoring/form/boat')}}">TUG BOAT</a>
+                            <li><a href="{{url('/monitoring/form/boat')}}">TUG BOAT EXPORT</a>
+                            </li>
+                            <li><a href="{{url('/pln/form/boat')}}">TUG BOAT PLN</a>
                             </li>
                             @endif
 @if(in_array('stock',$arrRULE))

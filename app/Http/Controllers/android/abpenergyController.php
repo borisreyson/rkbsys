@@ -242,4 +242,17 @@ class abpenergyController extends Controller
       }
       return $result;
     }
+
+    public function updatePengendalian(Request $request)
+    {
+      $result = ["success"=>false];
+      $pe = DB::table("hse.hazard_report_detail")->where("uid",$request->uid)->update(["idPengendalian"=>$request->idPengendalian]);
+      if($pe){
+        $result = ["success"=>true];
+      }else{
+        $result = ["success"=>false];
+      }
+      return $result;
+    }
+    
 }

@@ -1,7 +1,7 @@
 <?php
 $arrRULE = [];
   if(isset($getUser)){
-    $arrRULE = explode(',',$getUser->rule);    
+    $arrRULE = explode(',',$getUser->rule);
   }else{
     ?>
 <script>
@@ -56,9 +56,10 @@ $arrRULE = [];
       <li><a href="{{url('/absen/roster/karyawan')}}">Buat Roster</a></li>
       <li><a href="{{url('/absen/roster/karyawan/lihat')}}">Lihat Roster</a></li>
     </ul>
-  </li>     
-  @endif 
+  </li>
+  @endif
   <li><a href="{{url('/absen/rekap/karyawan')}}">Rekap Absen</a></li>
+  <li><a href="{{url('/absen/rekap/karyawan/new')}}">Rekap Absen New</a></li>
     @if(in_array('hge absen',$arrRULE))
     <li><a href="{{url('/absen/user/hge')}}">HCGA DEPT</a></li>
     @endif

@@ -111,6 +111,36 @@ Route::middleware('api')->delete('/save/buletin',
                             "alias" => 'flutter.deleteBuletin'
                         ]);
 
+Route::middleware('api')->get('/roster/kerja/karyawan',
+                        [ 'uses'=>'flutter\FlutterController@rosterKaryawan',
+                            "alias" => 'flutter.rosterKaryawan'
+                        ]);
+
+//Hendra
+Route::middleware('api')->post('/it/login',
+                        [ 'uses'=>'flutter\FlutterController@loginIt',
+                            "alias" => 'flutter.login.it'
+                        ]);
+
+Route::middleware('api')->post('/it/save/barang',
+                        [ 'uses'=>'flutter\FlutterController@saveBarang',
+                            "alias" => 'flutter.saveBarang'
+                        ]);
+
+Route::middleware('api')->post('/it/proses/barang',
+                        [ 'uses'=>'flutter\FlutterController@prosesBarang',
+                            "alias" => 'flutter.prosesBarang'
+                        ]);
+
+Route::middleware('api')->post('/it/tindakan/barang',
+                        [ 'uses'=>'flutter\FlutterController@tindakanBarang',
+                            "alias" => 'flutter.tindakanBarang'
+                        ]);
+
+Route::middleware('api')->get('/it/barang',
+                        [ 'uses'=>'flutter\FlutterController@dataForm',
+                            "alias" => 'flutter.dataForm'
+                        ]);
 
 };
 Route::domain('lp.abpjobsite.com')->group($masterDomain);

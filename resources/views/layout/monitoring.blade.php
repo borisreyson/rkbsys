@@ -34,7 +34,7 @@
       </li>
     </ul>
 </li>
-<li><a>Barging <span class="fa fa-chevron-down"></span></a>
+<li><a>Barging Export<span class="fa fa-chevron-down"></span></a>
 <ul class="nav child_menu">
       <li class="sub_menu"><a href="{{url('/barging/daily')}}">DAILY</a>
       </li>
@@ -45,7 +45,9 @@
       <li class="sub_menu"><a href="{{url('/barging/delay')}}">DELAY</a></li>
     </ul>
 </li>
-<li><a href="{{url('/boat')}}">Tug Boat</a></li>
+<li><a href="{{url('/mr/pln/barging')}}">Barging PLN</a></li>
+<li><a href="{{url('/boat')}}">Tug Boat Export</a></li>
+<li><a href="{{url('/mr/pln/boat')}}">Tug Boat PLN</a></li>
 <li><a href="{{url('/stockProduct')}}">Stock</a></li>
 <li><a href="{{url('/monitoring/sr/daily')}}">SR (Stripping Ratio)</a></li>
 @if(isset($_SESSION['admin']))

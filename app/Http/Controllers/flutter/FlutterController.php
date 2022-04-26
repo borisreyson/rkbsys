@@ -124,9 +124,12 @@ class FlutterController extends Controller
                     ->select("a.id_roster","a.nik","a.tanggal","b.kode_jam","c.masuk","c.pulang")
                     ->first();
         if($roster!=null){
+
             $sekarang = strtotime(date("H:i:s"));
             $masuk = strtotime(date("H:i:s",strtotime($roster->masuk)));
             $pulang = strtotime(date("H:i:s",strtotime($roster->pulang)));
+            // dd($roster);
+
             if($sekarang>=$masuk){
                 $idRoster = $roster->id_roster;
                 $kodeRoster = $roster->kode_jam;
@@ -134,6 +137,8 @@ class FlutterController extends Controller
                 $jamKerja = date('H:i',strtotime($roster->masuk))." - ".date('H:i',strtotime($roster->pulang));
             }else{
                 $ceklog = DB::table("absensi.ceklog")->where([["nik",$roster->nik],["tanggal",$roster->tanggal],["status","Pulang"]])->first();
+                // dd($ceklog);
+                if(isset($ceklog->status)){
                 if($ceklog->status=="Pulang"){
                     $roster = DB::table("db_karyawan.roster_kerja as a")
                     ->join("db_karyawan.kode_jam_masuk as b","b.id_kode","a.jam_kerja")
@@ -151,7 +156,12 @@ class FlutterController extends Controller
                     $tglRoster = $roster->tanggal;
                     $jamKerja = date('H:i',strtotime($roster->masuk))." - ".date('H:i',strtotime($roster->pulang));
                 }
-
+              }else{
+                $idRoster = $roster->id_roster;
+                $kodeRoster = $roster->kode_jam;
+                $tglRoster = $roster->tanggal;
+                $jamKerja = date('H:i',strtotime($roster->masuk))." - ".date('H:i',strtotime($roster->pulang));
+              }
             }
         }else{
                     $idRoster = 0;
@@ -541,6 +551,15 @@ class FlutterController extends Controller
       }else{
         return ["success"=>false];
       }
+    }
+    public function rosterKaryawan(Request $request)
+    {
+      $db = DB::table("db_karyawan.roster_kerja as a")
+            ->join("db_karyawan.kode_jam_masuk as b","b.id_kode","a.jam_kerja")
+            ->join("db_karyawan.jam_kerja as c","c.no","b.id_jam_kerja")
+            ->where([["a.nik",$request->nik],["a.tahun",$request->tahun],["a.bulan",$request->bulan]])
+            ->get();
+      return ["roster"=>$db];
     }
 
 }

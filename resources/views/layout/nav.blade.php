@@ -14,7 +14,7 @@ body {
 }
 .e_font{
  font-family: colonna_mt;
- font-size: 50px;  
+ font-size: 50px;
 }
 .left_col {
   background: rgba(0,0,0,0)!important;
@@ -51,7 +51,7 @@ body {
 <?php
 $arrRULE = [];
   if(isset($getUser)){
-    $arrRULE = explode(',',$getUser->rule);    
+    $arrRULE = explode(',',$getUser->rule);
   }else{
     ?>
 <script>
@@ -63,7 +63,7 @@ $arrRULE = [];
             <div class="navbar nav_title" style="border: 0;">
               <a href="{{url('https://bit.ly/2VWCDfb')}}" class="site_title">
                <span class="e_font">ABP</span><span class="e_rkb"> System</span></a>
-               
+
             </div>
 
             <div class="clearfix"></div>
@@ -97,28 +97,23 @@ $arrRULE = [];
 @if(in_array('form',$arrRULE))
                   <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                    
-@if(in_array('rkb',$arrRULE))    
+
+@if(in_array('rkb',$arrRULE))
                       <li><a href="{{url('/v1/form_rkb')}}">RKB</a></li>
 @endif
-                     
-@if(in_array('master request',$arrRULE))    
+
+@if(in_array('master request',$arrRULE))
                       <li><a href="{{url('/masteritem/request')}}">Master Item Request</a></li>
 @endif
-                 
+
 
 @if(in_array('monitoring',$arrRULE))
-<li><a>Monitoring<span class="fa fa-chevron-down"></span></a>
+<li><a>Monitoring Produksi<span class="fa fa-chevron-down"></span></a>
   <ul class="nav child_menu">
 @if(in_array('admin abp',$arrRULE))
-
-    <li><a>Produksi PT. ABP<span class="fa fa-chevron-down"></span></a>
-      <ul class="nav child_menu">
       @include('layout.abp',["getUser"=>$getUser,"arrRULE"=>$arrRULE])
-      </ul>
-    </li>
 @endif
-@if(in_array('admin mhu',$arrRULE))
+@if(in_array('admin mhu1',$arrRULE))
     <li><a>Produksi PT. MHU<span class="fa fa-chevron-down"></span></a>
       <ul class="nav child_menu">
       @include('layout.mhu',["getUser"=>$getUser])
@@ -128,11 +123,7 @@ $arrRULE = [];
 
 
 @if(in_array('unit rental',$arrRULE))
-    <li><a>Unit Rental<span class="fa fa-chevron-down"></span></a>
-      <ul class="nav child_menu">
       @include('layout.rental',["getUser"=>$getUser])
-      </ul>
-    </li>
 @endif
 
 
@@ -144,7 +135,7 @@ $arrRULE = [];
 @endif
                   @endif
                   <li><a><i class="fa fa-clone"></i>RKB <span class="fa fa-chevron-down"></span></a>
-                    
+
                     <ul class="nav child_menu">
                       @if($_SESSION['section']=="KABAG" || $_SESSION['section']=="SECTION_HEAD")
                       <li><a href="{{url('/kabag/rkb')}}">Rkb</a></li>
@@ -225,51 +216,44 @@ $arrRULE = [];
                       <li><a href="{{url('/satuan')}}">Satuan</a></li>
                       <li><a href="{{url('/masteritem/request/detail/log')}}">Request Master Item</a></li>
 @if(in_array('filter inventory',$arrRULE))
-                      <li><a href="{{url('/logistic/stock/adjust')}}">Adjust Stock</a></li> 
+                      <li><a href="{{url('/logistic/stock/adjust')}}">Adjust Stock</a></li>
                       @endif
 @endif
-                   
+
 @if(in_array('user inventory',$arrRULE))
                       <li><a href="{{url('/inventory/user/stock')}}">Stock</a></li>
-                      
-@endif    
-@if(in_array('req table inventory',$arrRULE))       
+
+@endif
+@if(in_array('req table inventory',$arrRULE))
 <li><a href="{{url('/masteritem/request/detail')}}">Request Master Item</a></li>
-@endif         
+@endif
 @if(in_array('dept inventory',$arrRULE))
-                      <li><a href="{{url('/inventory/user/stock')}}">Stock</a></li>        
-@endif              
+                      <li><a href="{{url('/inventory/user/stock')}}">Stock</a></li>
+@endif
                     </ul>
                   </li>
-                  @endif 
+                  @endif
 @else
-  
+
                   <li>
                     <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a><ul class="nav child_menu">
                       <li><a href="{{url('https://bit.ly/2VWCDfb')}}">Main Page</a></li>
                     </ul>
                   </li>
 @endif
-<!--bukan BOD-->                  
+<!--bukan BOD-->
 @if($_SESSION['department']!="mtk")
-<li><a><i class="fa fa-table"></i>Monitoring <span class="fa fa-chevron-down"></span></a>
+<li><a><i class="fa fa-table"></i>Monitoring Produksi<span class="fa fa-chevron-down"></span></a>
 <ul class="nav child_menu">
-                  <li><a><i class="fa fa-table"></i>Produksi PT. ABP<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
                       @include('layout.monitoring',["getUser"=>$getUser])
-                    </ul>
-                  </li>
-
+                  @if(in_array('adminIT',$arrRULE))
                   <li><a><i class="fa fa-table"></i>Produksi PT. MHU<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       @include('layout.mrMHU',["getUser"=>$getUser])
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i>Unit Rental<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      @include('layout.mrRental',["getUser"=>$getUser])
-                    </ul>
-                  </li>
+                  @endif
+                  @include('layout.mrRental',["getUser"=>$getUser])
 </ul>
 </li>
 @endif

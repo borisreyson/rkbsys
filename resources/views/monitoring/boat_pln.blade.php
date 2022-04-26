@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-ABP-system | TugBoat Export
+ABP-system | TugBoat PLN
 @endsection
 @section('css')
     <!-- bootstrap-wysiwyg -->
@@ -35,7 +35,7 @@ ABP-system | TugBoat Export
   <div class="col-lg-12">
     <br>
     <a href="{{url('/')}}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-    <a href="{{url('/boat')}}">TugBoat Export</a>
+    <a href="{{url('/boat')}}">TugBoat PLN</a>
     <br>
     <br>
   </div>
@@ -43,7 +43,7 @@ ABP-system | TugBoat Export
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Monitoring TugBoat Export</h2>
+                  <h2>Monitoring TugBoat PLN</h2>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">

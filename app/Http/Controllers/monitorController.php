@@ -161,11 +161,11 @@ class monitorController extends Controller
             $ob = mysqli_query($konek,"select * from ob where year(tgl) = '".date("Y",strtotime($dataY[0]->tgl))."' order by tgl desc");
         }
             $row = mysqli_fetch_object($ob);
-            
+
             $dDay = mysqli_query($konek,"select * from ob where year(tgl)='".date("Y",strtotime($row->tgl))."' and month(tgl) = '".date("m",strtotime($row->tgl))."' order by day(tgl) desc");
             $rowD = mysqli_fetch_object($dDay);
             $data[] = $rowD;
-        
+
         if(count($month)>0){
             if(isset($request->year) && !isset($request->m)){
             $daily = mysqli_query($konek,"select * from ob where year(tgl) = '".$request->year."' and month(tgl) = '".date("m",strtotime($month[0]->tgl))."' order by month(tgl) asc");
@@ -295,7 +295,7 @@ if(count($montH)>0){
             $dDay = mysqli_query($konek,"select * from hauling where year(tgl)='".date("Y",strtotime($row->tgl))."' and month(tgl) = '".date("m",strtotime($row->tgl))."' order by day(tgl) desc");
             $rowD = mysqli_fetch_object($dDay);
             $data[] = $rowD;
-        
+
 //dd($data);
         if(count($month)>0){
         if(isset($request->year) && !isset($request->m)){
@@ -305,7 +305,7 @@ if(count($montH)>0){
         }else{
             $daily = mysqli_query($konek,"select * from hauling where year(tgl) = '".date("Y",strtotime($dataY[0]->tgl))."' and month(tgl) = '".date("m",strtotime($month[0]->tgl))."' order by day(tgl) asc");
         }
-            
+
         while($rowx = mysqli_fetch_object($daily)){
             $dataX[] = $rowx;
         }
@@ -425,11 +425,11 @@ if(count($montH)>0){
         }else{
            $ob = mysqli_query($konek,"select * from crushing where year(tgl) = '".date("Y",strtotime($dataY[0]->tgl))."' order by tgl desc");
         }
-        $row = mysqli_fetch_object($ob);    
+        $row = mysqli_fetch_object($ob);
             $dDay = mysqli_query($konek,"select * from crushing where year(tgl)= '".date("Y",strtotime($row->tgl))."' and month(tgl) = '".date("m",strtotime($row->tgl))."' order by day(tgl) desc");
             $rowD = mysqli_fetch_object($dDay);
             $data[] = $rowD;
-        
+
 
         if(count($month)>0){
         if(isset($request->year) && !isset($request->m)){
@@ -439,7 +439,7 @@ if(count($montH)>0){
         }else{
             $daily = mysqli_query($konek,"select * from crushing where year(tgl) = '".date("Y",strtotime($dataY[0]->tgl))."' and month(tgl) = '".date("m",strtotime($month[0]->tgl))."' order by day(tgl) asc");
         }
-            
+
         while($rowx = mysqli_fetch_object($daily)){
             $dataX[] = $rowx;
         }
@@ -563,7 +563,7 @@ if(count($montH)>0){
             $dDay = mysqli_query($konek,"select * from barging where year(tgl)='".date("Y",strtotime($row->tgl))."' and month(tgl) = '".date("m",strtotime($row->tgl))."' order by (tgl) desc");
             $rowD = mysqli_fetch_object($dDay);
             $data[] = $rowD;
-        
+
 //dd($data);
         if(count($month)>0){
         if(isset($request->year) && !isset($request->m)){
@@ -573,7 +573,7 @@ if(count($montH)>0){
         }else{
             $daily = mysqli_query($konek,"select * from barging where year(tgl) = '".date("Y",strtotime($dataY[0]->tgl))."' and month(tgl) = '".date("m",strtotime($month[0]->tgl))."' order by day(tgl) asc");
         }
-            
+
         while($rowx = mysqli_fetch_object($daily)){
             $dataX[] = $rowx;
         }
@@ -685,7 +685,7 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"insert into ob (tgl,plan_daily,actual_daily,mtd_plan,mtd_actual,remark,user_input,time_input,flag) values ('".$date."','".$plan_daily."','".$actual_daily."','".$mtd_plan."','".$mtd_actual."','".$remarks."','".$_SESSION['username']."','".date("Y-m-d H:i:s")."','1')");
             if($OB)
             {
-             return redirect()->back()->with('success',"OB Telah Di Update");   
+             return redirect()->back()->with('success',"OB Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
@@ -720,14 +720,14 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"update ob SET plan_daily='".$plan_daily."', actual_daily='".$actual_daily."',mtd_plan='".$mtd_plan."' ,mtd_actual='".$mtd_actual."' ,remark='".$remarks."' ,time_input='".date("Y-m-d H:i:s")."',user_input='".$_SESSION['username']."' where tgl = '".$date."'");
             if($OB)
             {
-             return redirect('/monitoring/form/ob')->with('success',"OB Telah Di Update");   
+             return redirect('/monitoring/form/ob')->with('success',"OB Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
         }else{
              return redirect()->back()->with('failed',"Update Data Error!");
         }
-        
+
     }
     public function deleteOB(Request $request,$dataID)
     {
@@ -741,7 +741,7 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"update ob SET flag='2' where tgl = '".$date."'");
             if($OB)
             {
-             return redirect()->back()->with('success',"OB Telah Di Hapus");   
+             return redirect()->back()->with('success',"OB Telah Di Hapus");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
@@ -762,7 +762,7 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"update ob SET flag='1' where tgl = '".$date."'");
             if($OB)
             {
-             return redirect()->back()->with('success',"OB Telah Di Kembalikan");   
+             return redirect()->back()->with('success',"OB Telah Di Kembalikan");
             }else{
                 return redirect()->back()->with('failed',"Undo Data Error!");
             }
@@ -808,14 +808,14 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"update hauling SET plan_daily='".$plan_daily."', actual_daily='".$actual_daily."',mtd_plan='".$mtd_plan."' ,mtd_actual='".$mtd_actual."' ,remark='".$remarks."' ,time_input='".date("Y-m-d H:i:s")."',user_input='".$_SESSION['username']."' where tgl = '".$date."'");
             if($OB)
             {
-             return redirect('/monitoring/form/hauling')->with('success',"HAULING Telah Di Update");   
+             return redirect('/monitoring/form/hauling')->with('success',"HAULING Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
         }else{
              return redirect()->back()->with('failed',"Update Data Error!");
         }
-        
+
     }
 
     public function undoHAULING(Request $request,$dataID)
@@ -830,7 +830,7 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"update hauling SET flag='1' where tgl = '".$date."'");
             if($OB)
             {
-             return redirect()->back()->with('success',"HAULING Telah Di Kembalikan");   
+             return redirect()->back()->with('success',"HAULING Telah Di Kembalikan");
             }else{
                 return redirect()->back()->with('failed',"Undo Data Error!");
             }
@@ -851,7 +851,7 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"update hauling SET flag='2' where tgl = '".$date."'");
             if($OB)
             {
-             return redirect()->back()->with('success',"HAULING Telah Di Hapus");   
+             return redirect()->back()->with('success',"HAULING Telah Di Hapus");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
@@ -876,13 +876,13 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"insert into hauling (tgl,plan_daily,actual_daily,mtd_plan,mtd_actual,remark,user_input,time_input,flag) values ('".$date."','".$plan_daily."','".$actual_daily."','".$mtd_plan."','".$mtd_actual."','".$remarks."','".$_SESSION['username']."','".date("Y-m-d H:i:s")."','1')");
             if($OB)
             {
-             return redirect()->back()->with('success',"Hauling Telah Di Update");   
+             return redirect()->back()->with('success',"Hauling Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
         }else{
             return redirect()->back()->with('failed',"Update Data Error!");
-        }   
+        }
     }
     public function formCRUSHING(Request $request)
     {
@@ -921,14 +921,14 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"update crushing SET plan_daily='".$plan_daily."', actual_daily='".$actual_daily."',mtd_plan='".$mtd_plan."' ,mtd_actual='".$mtd_actual."' ,remark='".$remarks."' ,time_input='".date("Y-m-d H:i:s")."',user_input='".$_SESSION['username']."' where tgl = '".$date."'");
             if($OB)
             {
-             return redirect('/monitoring/form/crushing')->with('success',"CRUSHING Telah Di Update");   
+             return redirect('/monitoring/form/crushing')->with('success',"CRUSHING Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
         }else{
              return redirect()->back()->with('failed',"Update Data Error!");
         }
-        
+
     }
 
     public function deleteCRUSHING(Request $request,$dataID)
@@ -943,7 +943,7 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"update hauling SET flag='1' where tgl = '".$date."'");
             if($OB)
             {
-             return redirect()->back()->with('success',"HAULING Telah Di Kembalikan");   
+             return redirect()->back()->with('success',"HAULING Telah Di Kembalikan");
             }else{
                 return redirect()->back()->with('failed',"Undo Data Error!");
             }
@@ -964,7 +964,7 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"update hauling SET flag='2' where tgl = '".$date."'");
             if($OB)
             {
-             return redirect()->back()->with('success',"HAULING Telah Di Hapus");   
+             return redirect()->back()->with('success',"HAULING Telah Di Hapus");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
@@ -989,13 +989,13 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"insert into crushing (tgl,plan_daily,actual_daily,mtd_plan,mtd_actual,remark,user_input,time_input,flag) values ('".$date."','".$plan_daily."','".$actual_daily."','".$mtd_plan."','".$mtd_actual."','".$remarks."','".$_SESSION['username']."','".date("Y-m-d H:i:s")."','1')");
             if($OB)
             {
-             return redirect()->back()->with('success',"Hauling Telah Di Update");   
+             return redirect()->back()->with('success',"Hauling Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
         }else{
             return redirect()->back()->with('failed',"Update Data Error!");
-        }   
+        }
     }
 
 
@@ -1038,14 +1038,14 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"update barging SET plan_daily='".$plan_daily."', actual_daily='".$actual_daily."',mtd_plan='".$mtd_plan."' ,mtd_actual='".$mtd_actual."' ,remark='".$remarks."' ,time_input='".date("Y-m-d H:i:s")."',user_input='".$_SESSION['username']."' where tgl = '".$date."'");
             if($OB)
             {
-             return redirect('/monitoring/form/barging')->with('success',"Barging Telah Di Update ");   
+             return redirect('/monitoring/form/barging')->with('success',"Barging Telah Di Update ");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
         }else{
              return redirect()->back()->with('failed',"Update Data Error!");
         }
-        
+
     }
 
     public function undoBARGING(Request $request,$dataID)
@@ -1060,7 +1060,7 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"update barging SET flag='1' where tgl = '".$date."'");
             if($OB)
             {
-             return redirect('/monitoring/form/barging')->with('success',"Barging Telah Di Kembalikan");   
+             return redirect('/monitoring/form/barging')->with('success',"Barging Telah Di Kembalikan");
             }else{
                 return redirect()->back()->with('failed',"Undo Data Error!");
             }
@@ -1081,7 +1081,7 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"update barging SET flag='2' where tgl = '".$date."'");
             if($OB)
             {
-             return redirect()->back()->with('success',"Barging Telah Di Hapus");   
+             return redirect()->back()->with('success',"Barging Telah Di Hapus");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
@@ -1106,13 +1106,13 @@ if(count($montH)>0){
             $OB = mysqli_query($konek,"insert into barging (tgl,plan_daily,actual_daily,mtd_plan,mtd_actual,remark,user_input,time_input,flag) values ('".$date."','".$plan_daily."','".$actual_daily."','".$mtd_plan."','".$mtd_actual."','".$remarks."','".$_SESSION['username']."','".date("Y-m-d H:i:s")."','1')");
             if($OB)
             {
-             return redirect()->back()->with('success',"Barging Telah Di Update");   
+             return redirect()->back()->with('success',"Barging Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
         }else{
             return redirect()->back()->with('failed',"Update Data Error!");
-        }   
+        }
     }
 
     public function formBOAT(Request $request)
@@ -1125,7 +1125,7 @@ if(count($montH)>0){
     public function postBOAT(Request $request)
     {
         if(!isset($_SESSION['username'])) return redirect('/');
-        
+
         $tonase = preg_replace('/[ ,]+/', '', $request->tonase);
             $insert = DB::table("monitoring_produksi.barge_boat")
                   ->insert([
@@ -1143,7 +1143,7 @@ if(count($montH)>0){
                 return redirect()->back()->with("success","Data Success Input!");
             }else{
                 return redirect()->back()->with("failed","Failed Input Data!");
-            }        
+            }
     }
 
     public function editBOAT(Request $request,$dataID)
@@ -1164,7 +1164,7 @@ if(count($montH)>0){
 
             $OB = DB::table("monitoring_produksi.barge_boat")
                     ->where("no",hex2bin($dataID))
-                    /*->get();*/                    
+                    /*->get();*/
                     ->update([
                     "tugboat"=>$request->boat,
                     "barge"=>$request->barge,
@@ -1172,10 +1172,10 @@ if(count($montH)>0){
                     "tonase"=>$tonase,
                     "status"=>$request->keterangan,
                     "time_input"=>date("Y-m-d H:i:s")]);
-                    
+
             if($OB)
             {
-             return redirect('/monitoring/form/boat')->with('success',"Boat Telah Di Update");   
+             return redirect('/monitoring/form/boat')->with('success',"Boat Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
@@ -1185,29 +1185,29 @@ if(count($montH)>0){
     {
         if(!isset($_SESSION['username'])) return redirect('/');
         $konek = $this->Connection();
-        
+
             $OB = mysqli_query($konek,"update barge_boat SET flag='2' where no = '".hex2bin($dataID)."'");
             if($OB)
             {
-             return redirect('/monitoring/form/boat')->with('success',"Boat Telah Di Hapus!");   
+             return redirect('/monitoring/form/boat')->with('success',"Boat Telah Di Hapus!");
             }else{
                 return redirect()->back()->with('failed',"Undo Data Error!");
             }
-        
+
     }
     public function undoBOAT(Request $request,$dataID)
     {
         if(!isset($_SESSION['username'])) return redirect('/');
         $konek = $this->Connection();
-        
+
             $OB = mysqli_query($konek,"update barge_boat SET flag='1' where no = '".hex2bin($dataID)."'");
             if($OB)
             {
-             return redirect('/monitoring/form/boat')->with('success',"Boat Telah Di Kembalikan!");   
+             return redirect('/monitoring/form/boat')->with('success',"Boat Telah Di Kembalikan!");
             }else{
                 return redirect()->back()->with('failed',"Undo Data Error!");
             }
-        
+
     }
 
     public function formSTOCK(Request $request)
@@ -1221,7 +1221,7 @@ if(count($montH)>0){
     {
         if(!isset($_SESSION['username'])) return redirect('/');
         $check = DB::table("monitoring_produksi.stock")->where('tgl',date("Y-m-d",strtotime($request->tgl)))->count();
-        if($check>0){            
+        if($check>0){
                 return redirect()->back()->with("failed","Harap Memeriksa Tanggal!");
         }
         $stock_rom = preg_replace('/[ ,]+/', '', $request->stock_rom);
@@ -1241,7 +1241,7 @@ if(count($montH)>0){
                 return redirect()->back()->with("success","Data Success Input!");
             }else{
                 return redirect()->back()->with("failed","Failed Input Data!");
-            }        
+            }
     }
 
     public function editSTOCK(Request $request,$dataID)
@@ -1263,7 +1263,7 @@ if(count($montH)>0){
 
             $OB = DB::table("monitoring_produksi.stock")
                     ->where("tgl",hex2bin($dataID))
-                    /*->get();*/                    
+                    /*->get();*/
                     ->update([
                     //"dl_daily_actual"=>$request->dl_daily,
                     //"dl_mtd_actual"=>$request->dl_mtd,
@@ -1271,10 +1271,10 @@ if(count($montH)>0){
                     "stock_product"=>$stock_product,
                     "remark"=>$request->keterangan,
                     "time_input"=>date("Y-m-d H:i:s")]);
-                    
+
             if($OB)
             {
-             return redirect('/monitoring/form/stock')->with('success',"Stock Telah Di Update");   
+             return redirect('/monitoring/form/stock')->with('success',"Stock Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
@@ -1284,29 +1284,29 @@ if(count($montH)>0){
     {
         if(!isset($_SESSION['username'])) return redirect('/');
         $konek = $this->Connection();
-        
+
             $OB = mysqli_query($konek,"update stock SET flag='2' where tgl = '".hex2bin($dataID)."'");
             if($OB)
             {
-             return redirect('/monitoring/form/stock')->with('success',"Stock Telah Di Hapus!");   
+             return redirect('/monitoring/form/stock')->with('success',"Stock Telah Di Hapus!");
             }else{
                 return redirect()->back()->with('failed',"Undo Data Error!");
             }
-        
+
     }
     public function undoSTOCK(Request $request,$dataID)
     {
         if(!isset($_SESSION['username'])) return redirect('/');
         $konek = $this->Connection();
-        
+
             $OB = mysqli_query($konek,"update stock SET flag='1' where tgl = '".hex2bin($dataID)."'");
             if($OB)
             {
-             return redirect('/monitoring/form/stock')->with('success',"Stock Telah Di Kembalikan!");   
+             return redirect('/monitoring/form/stock')->with('success',"Stock Telah Di Kembalikan!");
             }else{
                 return redirect()->back()->with('failed',"Undo Data Error!");
             }
-        
+
     }
 
     //delay Hauling
@@ -1318,7 +1318,7 @@ if(count($montH)>0){
         $typeDelay =  DB::table("monitoring_produksi.type_delay")
                         ->where("groupID","OPR")
                         ->get();
-        
+
         return view("monitoring.form.dl_hauling",["getUser"=>$this->user,"konek"=>$konek,"typeDelay"=>$typeDelay]);
     }
 
@@ -1452,7 +1452,7 @@ if(count($montH)>0){
     {
         if(!isset($_SESSION['username'])) return redirect('/');
         $konek = $this->Connection();
-        
+
         return view("monitoring.form.dl_barging",["getUser"=>$this->user,"konek"=>$konek]);
     }
     public function postDLBarging(Request $request)
@@ -1507,7 +1507,7 @@ if(count($montH)>0){
         }
     }
 
-    
+
     public function deleteDLBarging(Request $request,$dataID)
     {
         if(!isset($_SESSION['username'])) return redirect('/');
@@ -1641,9 +1641,9 @@ if(count($montH)>0){
         }
     }
 
-    
+
     public function deleteDLob(Request $request,$dataID)
-    {   
+    {
         if(!isset($_SESSION['username'])) return redirect('/');
         $HLDelay =  DB::table("monitoring_produksi.ob_delay_daily")
                     ->where("no",hex2bin($dataID))
@@ -1807,7 +1807,7 @@ if(count($montH)>0){
                           "DL"=>$typeCR
                         );
            // print_r($v);
-        }   
+        }
         //dd($HLDelay);
         //return($data);
         return view("monitoring.form.dl_crushing",["getUser"=>$this->user,"konek"=>$konek, "HLDelay" => json_encode($data),"edit"=>"true","typeDelay"=>$typeDelay]);
@@ -1820,7 +1820,7 @@ if(count($montH)>0){
         //dd(hex2bin($request->t));
         //dd($request);
         if($request->Work_Hour){
-       
+
         $W_h =  DB::table("monitoring_produksi.cr_delay_daily")
                     ->where([
                         ["tgl",hex2bin($dataID)],
@@ -1882,7 +1882,7 @@ if(count($montH)>0){
 public function deleteDLCrushing(Request $request,$dataID)
 {
     if(!isset($_SESSION['username'])) return redirect('/');
-    
+
     $db = DB::table("monitoring_produksi.cr_delay_daily")
         ->whereRaw("tgl='".hex2bin($dataID)."' and shift='".hex2bin($request->sh)."' and  type_delay='".hex2bin($request->t)."'")
         ->update([
@@ -1899,7 +1899,7 @@ public function undoDLCrushing(Request $request,$dataID)
     $tgl = (hex2bin($dataID));
     $t = (hex2bin($request->t));
     $sh = (hex2bin($request->sh));
-    
+
         if(!isset($_SESSION['username'])) return redirect('/');
         $HLDelay =  DB::table("monitoring_produksi.cr_delay_daily")
                     ->whereRaw("tgl = '".$tgl."' and type_delay='".$t."' and shift = '".$sh."'")
@@ -1914,7 +1914,7 @@ public function undoDLCrushing(Request $request,$dataID)
         {
             return redirect()->back()->with("failed","Gagal Mengembalikan Data!");
         }
-        
+
 }
 public function DelayCrushing(Request $request)
     {
@@ -1970,15 +1970,15 @@ if(count($montH)>0){
             $c = DB::table("monitoring_mhu.hauling")->where("tgl","<",date("Y-m-d",strtotime($request->date)))->orderBy("tgl","desc")->sum("actual_daily");
             $d=number_format($c+$request->actual_daily,3);
         }else{
-            $c = DB::table("monitoring_mhu.hauling")->orderBy("tgl","desc")->first();     
+            $c = DB::table("monitoring_mhu.hauling")->orderBy("tgl","desc")->first();
             if(isset($c->mtd_actual)){
             $a= $c->mtd_actual;
             }else{
                 $a= 0;
-            }       
+            }
             $d=number_format($a+$request->actual_daily,3);
         }
-        
+
         echo $d;
     }
     public function mhuHauling_POST(Request $request)
@@ -1990,7 +1990,7 @@ if(count($montH)>0){
         $mtd_actual = preg_replace('/[ ,]+/', '', $request->mtd_actual);
         $remarks = $request->keterangan;
         $date = date("Y-m-d",strtotime(($request->tgl)));
-        
+
         $in_mhu_hl = DB::table("monitoring_mhu.hauling")
                     ->insert([
                         "tgl"=>$date,
@@ -2003,12 +2003,12 @@ if(count($montH)>0){
                     ]);
             if($in_mhu_hl)
             {
-             return redirect()->back()->with('success',"Hauling Telah Di Update");   
+             return redirect()->back()->with('success',"Hauling Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
     }
-    
+
     public function edit_mhu_HAULING(Request $request,$dataID)
     {
         if(!isset($_SESSION['username'])) return redirect('/');
@@ -2017,7 +2017,7 @@ if(count($montH)>0){
         //dd($hl_mhu);
         return view("mhu.form.hauling",["getUser"=>$this->user,"daily"=>$hl_mhu,"edit"=>"true"]);
     }
-    
+
     public function update_mhu_HAULING(Request $request,$dataID)
     {
         if(!isset($_SESSION['username'])) return redirect('/');
@@ -2037,14 +2037,14 @@ if(count($montH)>0){
                         "mtd_actual"=>$mtd_actual,
                         "remark"=>$remarks,
                     ]);
-        
+
             if($in_mhu_hl)
             {
-             return redirect('/mhu/form/hauling')->with('success',"Hauling Telah Di Update");   
+             return redirect('/mhu/form/hauling')->with('success',"Hauling Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
-        
+
     }
     public function delete_mhu_HAULING(Request $request,$dataID)
     {
@@ -2058,14 +2058,14 @@ if(count($montH)>0){
                         ->update([
                                     "flag"=>'2'
                                 ]);
-        
+
             if($dailyPlan)
             {
-             return redirect()->back()->with('success',"Hauling Telah Di Hapus");   
+             return redirect()->back()->with('success',"Hauling Telah Di Hapus");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
-        
+
 
     }
     public function undo_mhu_HAULING(Request $request,$dataID)
@@ -2078,14 +2078,14 @@ if(count($montH)>0){
         $dailyPlan =  DB::table("monitoring_mhu.hauling")->where("tgl",$date)->update(["flag"=>'1']);
             if($dailyPlan)
             {
-             return redirect()->back()->with('success',"Hauling Telah Di Kembalikan");   
+             return redirect()->back()->with('success',"Hauling Telah Di Kembalikan");
             }else{
                 return redirect()->back()->with('failed',"Undo Data Error!");
             }
 
     }
 //mhuCrushing
-    
+
     public function mhuCrushing(Request $request)
     {
         if(!isset($_SESSION['username'])) return redirect('/');
@@ -2099,15 +2099,15 @@ if(count($montH)>0){
             $c = DB::table("monitoring_mhu.crushing")->where("tgl","<",date("Y-m-d",strtotime($request->date)))->orderBy("tgl","desc")->sum("actual_daily");
             $d=number_format($c+$request->actual_daily,3);
         }else{
-            $c = DB::table("monitoring_mhu.crushing")->orderBy("tgl","desc")->first();     
+            $c = DB::table("monitoring_mhu.crushing")->orderBy("tgl","desc")->first();
             if(isset($c->mtd_actual)){
             $a= $c->mtd_actual;
             }else{
                 $a= 0;
-            }       
+            }
             $d=number_format($a+$request->actual_daily,3);
         }
-        
+
         echo $d;
     }
     public function mhuCrushing_POST(Request $request)
@@ -2119,7 +2119,7 @@ if(count($montH)>0){
         $mtd_actual = preg_replace('/[ ,]+/', '', $request->mtd_actual);
         $remarks = $request->keterangan;
         $date = date("Y-m-d",strtotime(($request->tgl)));
-        
+
         $in_mhu_hl = DB::table("monitoring_mhu.crushing")
                     ->insert([
                         "tgl"=>$date,
@@ -2132,7 +2132,7 @@ if(count($montH)>0){
                     ]);
             if($in_mhu_hl)
             {
-             return redirect()->back()->with('success',"Crushing Telah Di Update");   
+             return redirect()->back()->with('success',"Crushing Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
@@ -2163,14 +2163,14 @@ if(count($montH)>0){
                         "mtd_actual"=>$mtd_actual,
                         "remark"=>$remarks,
                     ]);
-        
+
             if($in_mhu_hl)
             {
-             return redirect('/mhu/form/crushing')->with('success',"Crushing Telah Di Update");   
+             return redirect('/mhu/form/crushing')->with('success',"Crushing Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
-        
+
     }
     public function delete_mhu_Crushing(Request $request,$dataID)
     {
@@ -2184,14 +2184,14 @@ if(count($montH)>0){
                         ->update([
                                     "flag"=>'2'
                                 ]);
-        
+
             if($dailyPlan)
             {
-             return redirect()->back()->with('success',"Crushing Telah Di Hapus");   
+             return redirect()->back()->with('success',"Crushing Telah Di Hapus");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
-        
+
 
     }
     public function undo_mhu_Crushing(Request $request,$dataID)
@@ -2204,14 +2204,139 @@ if(count($montH)>0){
         $dailyPlan =  DB::table("monitoring_mhu.crushing")->where("tgl",$date)->update(["flag"=>'1']);
             if($dailyPlan)
             {
-             return redirect()->back()->with('success',"Crushing Telah Di Kembalikan");   
+             return redirect()->back()->with('success',"Crushing Telah Di Kembalikan");
+            }else{
+                return redirect()->back()->with('failed',"Undo Data Error!");
+            }
+
+    }
+		//plnBarging
+		public function plnBarging(Request $request)
+    {
+        if(!isset($_SESSION['username'])) return redirect('/');
+        $daily = DB::table("monitoring_pln.barging")->first();
+        return view("monitoring.form.pln",["getUser"=>$this->user,"daily"=>$daily ]);
+    }
+		public function cek_br_pln(Request $request)
+    {
+        if(!isset($_SESSION['username'])) return redirect('/');
+        if(isset($request->date)){
+            $c = DB::table("monitoring_pln.barging")->where("tgl","<",date("Y-m-d",strtotime($request->date)))->orderBy("tgl","desc")->sum("actual_daily");
+            $d=number_format($c+$request->actual_daily,3);
+        }else{
+            $c = DB::table("monitoring_pln.barging")->orderBy("tgl","desc")->first();
+            if(isset($c->mtd_actual)){
+            $a= $c->mtd_actual;
+            }else{
+                $a= 0;
+            }
+            $d=number_format($a+$request->actual_daily,3);
+        }
+
+        echo $d;
+    }
+		public function plnBarging_POST(Request $request)
+    {
+        if(!isset($_SESSION['username'])) return redirect('/');
+        $plan_daily = preg_replace('/[ ,]+/', '', $request->plan_daily);
+        $actual_daily = preg_replace('/[ ,]+/', '', $request->actual_daily);
+        $mtd_plan = preg_replace('/[ ,]+/', '', $request->mtd_plan);
+        $mtd_actual = preg_replace('/[ ,]+/', '', $request->mtd_actual);
+        $remarks = $request->keterangan;
+        $date = date("Y-m-d",strtotime(($request->tgl)));
+
+        $in_mhu_hl = DB::table("monitoring_pln.barging")
+                    ->insert([
+                        "tgl"=>$date,
+                        "actual_daily"=>$actual_daily,
+                        "mtd_plan"=>$mtd_plan,
+                        "mtd_actual"=>$mtd_actual,
+                        "remark"=>$remarks,
+                        "user_input"=>$_SESSION['username'],
+                        "time_input"=>date("Y-m-d H:i:s")
+                    ]);
+            if($in_mhu_hl)
+            {
+             return redirect()->back()->with('success',"Barging Telah Di Update");
+            }else{
+                return redirect()->back()->with('failed',"Update Data Error!");
+            }
+    }
+		public function edit_pln_Barging(Request $request,$dataID)
+    {
+        if(!isset($_SESSION['username'])) return redirect('/');
+        $dataID= hex2bin($dataID);
+        $hl_mhu = DB::table("monitoring_pln.barging")->where("tgl",$dataID)->orderBy("tgl","desc")->first();
+        //dd($hl_mhu);
+        return view("monitoring.form.pln",["getUser"=>$this->user,"daily"=>$hl_mhu,"edit"=>"true"]);
+    }
+    public function update_pln_Barging(Request $request,$dataID)
+    {
+        if(!isset($_SESSION['username'])) return redirect('/');
+        $plan_daily = preg_replace('/[ ,]+/', '', $request->plan_daily);
+        $actual_daily = preg_replace('/[ ,]+/', '', $request->actual_daily);
+        $mtd_plan = preg_replace('/[ ,]+/', '', $request->mtd_plan);
+        $mtd_actual = preg_replace('/[ ,]+/', '', $request->mtd_actual);
+        $remarks = $request->keterangan;
+        $date = date("Y-m-d",strtotime(hex2bin($dataID)));
+        //dd($date);
+        $in_mhu_hl = DB::table("monitoring_pln.barging")
+                    ->where("tgl",$date)
+                    ->update([
+                        "actual_daily"=>$actual_daily,
+                        "mtd_plan"=>$mtd_plan,
+                        "mtd_actual"=>$mtd_actual,
+                        "remark"=>$remarks,
+                    ]);
+
+            if($in_mhu_hl)
+            {
+             return redirect('/pln/form/barging')->with('success',"Barging Telah Di Update");
+            }else{
+                return redirect()->back()->with('failed',"Update Data Error!");
+            }
+
+    }
+    public function delete_pln_Barging(Request $request,$dataID)
+    {
+        if(!isset($_SESSION['username'])) return redirect('/');
+        $konek = $this->Connection();
+        $date = date("Y-m-d",strtotime(hex2bin($dataID)));
+        //dd($date);
+
+        $dailyPlan =  DB::table("monitoring_pln.barging")
+                        ->where("tgl",$date)
+                        ->update([
+                                    "flag"=>'2'
+                                ]);
+
+            if($dailyPlan)
+            {
+             return redirect()->back()->with('success',"Barging Telah Di Hapus");
+            }else{
+                return redirect()->back()->with('failed',"Update Data Error!");
+            }
+
+
+    }
+    public function undo_pln_Barging(Request $request,$dataID)
+    {
+        if(!isset($_SESSION['username'])) return redirect('/');
+        $konek = $this->Connection();
+        $date = date("Y-m-d",strtotime(hex2bin($dataID)));
+        //dd($date);
+
+        $dailyPlan =  DB::table("monitoring_pln.barging")->where("tgl",$date)->update(["flag"=>'1']);
+            if($dailyPlan)
+            {
+             return redirect()->back()->with('success',"Barging Telah Di Kembalikan");
             }else{
                 return redirect()->back()->with('failed',"Undo Data Error!");
             }
 
     }
 //mhuBarging
-    
+
     public function mhuBarging(Request $request)
     {
         if(!isset($_SESSION['username'])) return redirect('/');
@@ -2225,15 +2350,15 @@ if(count($montH)>0){
             $c = DB::table("monitoring_mhu.barging")->where("tgl","<",date("Y-m-d",strtotime($request->date)))->orderBy("tgl","desc")->sum("actual_daily");
             $d=number_format($c+$request->actual_daily,3);
         }else{
-            $c = DB::table("monitoring_mhu.barging")->orderBy("tgl","desc")->first();     
+            $c = DB::table("monitoring_mhu.barging")->orderBy("tgl","desc")->first();
             if(isset($c->mtd_actual)){
             $a= $c->mtd_actual;
             }else{
                 $a= 0;
-            }       
+            }
             $d=number_format($a+$request->actual_daily,3);
         }
-        
+
         echo $d;
     }
     public function mhuBarging_POST(Request $request)
@@ -2245,7 +2370,7 @@ if(count($montH)>0){
         $mtd_actual = preg_replace('/[ ,]+/', '', $request->mtd_actual);
         $remarks = $request->keterangan;
         $date = date("Y-m-d",strtotime(($request->tgl)));
-        
+
         $in_mhu_hl = DB::table("monitoring_mhu.barging")
                     ->insert([
                         "tgl"=>$date,
@@ -2258,12 +2383,12 @@ if(count($montH)>0){
                     ]);
             if($in_mhu_hl)
             {
-             return redirect()->back()->with('success',"Barging Telah Di Update");   
+             return redirect()->back()->with('success',"Barging Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
     }
-    
+
     public function edit_mhu_Barging(Request $request,$dataID)
     {
         if(!isset($_SESSION['username'])) return redirect('/');
@@ -2290,14 +2415,14 @@ if(count($montH)>0){
                         "mtd_actual"=>$mtd_actual,
                         "remark"=>$remarks,
                     ]);
-        
+
             if($in_mhu_hl)
             {
-             return redirect('/mhu/form/barging')->with('success',"Barging Telah Di Update");   
+             return redirect('/mhu/form/barging')->with('success',"Barging Telah Di Update");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
-        
+
     }
     public function delete_mhu_Barging(Request $request,$dataID)
     {
@@ -2311,14 +2436,14 @@ if(count($montH)>0){
                         ->update([
                                     "flag"=>'2'
                                 ]);
-        
+
             if($dailyPlan)
             {
-             return redirect()->back()->with('success',"Barging Telah Di Hapus");   
+             return redirect()->back()->with('success',"Barging Telah Di Hapus");
             }else{
                 return redirect()->back()->with('failed',"Update Data Error!");
             }
-        
+
 
     }
     public function undo_mhu_Barging(Request $request,$dataID)
@@ -2331,13 +2456,13 @@ if(count($montH)>0){
         $dailyPlan =  DB::table("monitoring_mhu.barging")->where("tgl",$date)->update(["flag"=>'1']);
             if($dailyPlan)
             {
-             return redirect()->back()->with('success',"Barging Telah Di Kembalikan");   
+             return redirect()->back()->with('success',"Barging Telah Di Kembalikan");
             }else{
                 return redirect()->back()->with('failed',"Undo Data Error!");
             }
 
     }
-    
+
     public function intervalTime(Request $request)
     {
         $send = new EmailSend();
@@ -2514,7 +2639,7 @@ if(count($montH)>0){
                 ]);
             }
                 print_r($res);
-            
+
         }
         //Email Reset
 
@@ -2540,9 +2665,9 @@ if(count($montH)>0){
                 ]);
             }
                 print_r($res);
-            
+
         }
-        
+
         // $this->hazardReportTenggat();
     }
     public function hazardReportTenggat()
@@ -2571,9 +2696,9 @@ if(count($montH)>0){
                 foreach($dataUser as $k => $v){
                     $tenggat = date('d F Y',strtotime($vA->tgl_tenggat));
  $pesan = <<<EOT
-        Perusahaan      : $vA->perusahaan \r\n, 
-        Bahaya          : $vA->deskripsi \r\n, 
-        Batas Perbaikan : $tenggat \r\n, 
+        Perusahaan      : $vA->perusahaan \r\n,
+        Bahaya          : $vA->deskripsi \r\n,
+        Batas Perbaikan : $tenggat \r\n,
         Dibuat          : $vA->dibuat \r\n,
         PIC             : $vA->dikerjakan \r\n
 EOT;

@@ -88,6 +88,10 @@ Route::post('/absen/roster/karyawan/lihat', [ 'uses'=>'absen\absenController@upd
 Route::get('/absen/rekap/karyawan', [ 'uses'=>'absen\absenController@rekapAbsen',
 				  "alias" => 'absen.user.rekapAbsen'
 				]);
+
+Route::get('/absen/rekap/karyawan/new', [ 'uses'=>'absen\absenController@rekapAbsenNew',
+				  "alias" => 'absen.user.rekapAbsenNew'
+				]);
 Route::get('/absen/rekap/karyawan/export', [ 'uses'=>'absen\absenController@exportRekap',
 				  "alias" => 'absen.user.exportRekap'
 				]);

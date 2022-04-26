@@ -623,35 +623,36 @@ Route::post('/mhu/form/crushing',[
 				]);
 
 //FORM Barging MHU ABP
-
-Route::get('/mhu/form/barging',[
-					"uses" => "monitorController@mhuBarging",
-					"alias"=> "monitor.mhuBarging"
-				]);
-Route::get('/mhu/form/barging/q-{dataID}',[
-					"uses" => "monitorController@edit_mhu_Barging",
-					"alias"=> "monitor.edit_mhu_Barging"
-				]);
-Route::post('/mhu/form/barging/q-{dataID}',[
-					"uses" => "monitorController@update_mhu_Barging",
-					"alias"=> "monitor.update_mhu_Barging"
-				]);
-Route::get('/mhu/form/barging/delete-{dataID}',[
-					"uses" => "monitorController@delete_mhu_Barging",
-					"alias"=> "monitor.delete_mhu_Barging"
-				]);
-Route::get('/mhu/form/barging/undo-{dataID}',[
-					"uses" => "monitorController@undo_mhu_Barging",
-					"alias"=> "monitor.undo_mhu_Barging"
-				]);
-Route::get("/mhu/monitoring/form/barging/check",[
-					"uses" => "monitorController@cek_br_mhu",
-					"alias"=> "monitor.cek_br_mhu"
-				]);
-Route::post('/mhu/form/barging',[
-					"uses" => "monitorController@mhuBarging_POST",
-					"alias"=> "monitor.mhuBarging_POST"
-				]);
+Route::group(['prefix' => '/mhu/form/barging'], function () {
+	Route::get('/',[
+						"uses" => "monitorController@mhuBarging",
+						"alias"=> "monitor.mhuBarging"
+					]);
+	Route::get('/q-{dataID}',[
+						"uses" => "monitorController@edit_mhu_Barging",
+						"alias"=> "monitor.edit_mhu_Barging"
+					]);
+	Route::post('/q-{dataID}',[
+						"uses" => "monitorController@update_mhu_Barging",
+						"alias"=> "monitor.update_mhu_Barging"
+					]);
+	Route::get('/delete-{dataID}',[
+						"uses" => "monitorController@delete_mhu_Barging",
+						"alias"=> "monitor.delete_mhu_Barging"
+					]);
+	Route::get('/undo-{dataID}',[
+						"uses" => "monitorController@undo_mhu_Barging",
+						"alias"=> "monitor.undo_mhu_Barging"
+					]);
+	Route::get("/barging/check",[
+						"uses" => "monitorController@cek_br_mhu",
+						"alias"=> "monitor.cek_br_mhu"
+					]);
+	Route::post('/',[
+						"uses" => "monitorController@mhuBarging_POST",
+						"alias"=> "monitor.mhuBarging_POST"
+					]);
+			});
 //FORM BOAT MHU
 Route::get('/mhu/form/boat',[
 					"uses" => "mhuController@formBOAT",
@@ -705,53 +706,53 @@ Route::get('/mhu/form/stock/undo-{dataID}',[
 
 //MONITORING MHU
 
+Route::group(['prefix' => '/mr/mhu'], function () {
+	Route::get("/hauling",[
+						"uses" => "mhuController@hauling",
+						"alias"=> "mhuController.hauling"
+					]);
+	Route::get("/hauling/monthly",[
+						"uses" => "mhuController@haulMonthly",
+						"alias"=> "mhuController.haulMonthly"
+					]);
+	Route::get("/hauling/ach",[
+						"uses" => "mhuController@haulACH",
+						"alias"=> "mhuController.haulACH"
+					]);
+	Route::get("/crushing",[
+						"uses" => "mhuController@crushing",
+						"alias"=> "mhuController.crushing"
+					]);
+	Route::get("/crushing/monthly",[
+						"uses" => "mhuController@crushMonthly",
+						"alias"=> "mhuController.crushMonthly"
+					]);
+	Route::get("/crushing/ach",[
+						"uses" => "mhuController@crushACH",
+						"alias"=> "mhuController.crushACH"
+					]);
+	Route::get("/barging",[
+						"uses" => "mhuController@barging",
+						"alias"=> "mhuController.barging"
+					]);
+	Route::get("/barging/monthly",[
+						"uses" => "mhuController@bargeMonthly",
+						"alias"=> "mhuController.bargeMonthly"
+					]);
+	Route::get("/barging/ach",[
+						"uses" => "mhuController@bargeACH",
+						"alias"=> "mhuController.bargeACH"
+					]);
 
-Route::get("/mr/mhu/hauling",[
-					"uses" => "mhuController@hauling",
-					"alias"=> "mhuController.hauling"
-				]);
-Route::get("/mr/mhu/hauling/monthly",[
-					"uses" => "mhuController@haulMonthly",
-					"alias"=> "mhuController.haulMonthly"
-				]);
-Route::get("/mr/mhu/hauling/ach",[
-					"uses" => "mhuController@haulACH",
-					"alias"=> "mhuController.haulACH"
-				]);
-Route::get("/mr/mhu/crushing",[
-					"uses" => "mhuController@crushing",
-					"alias"=> "mhuController.crushing"
-				]);
-Route::get("/mr/mhu/crushing/monthly",[
-					"uses" => "mhuController@crushMonthly",
-					"alias"=> "mhuController.crushMonthly"
-				]);
-Route::get("/mr/mhu/crushing/ach",[
-					"uses" => "mhuController@crushACH",
-					"alias"=> "mhuController.crushACH"
-				]);
-Route::get("/mr/mhu/barging",[
-					"uses" => "mhuController@barging",
-					"alias"=> "mhuController.barging"
-				]);
-Route::get("/mr/mhu/barging/monthly",[
-					"uses" => "mhuController@bargeMonthly",
-					"alias"=> "mhuController.bargeMonthly"
-				]);
-Route::get("/mr/mhu/barging/ach",[
-					"uses" => "mhuController@bargeACH",
-					"alias"=> "mhuController.bargeACH"
-				]);
-
-Route::get("/mr/mhu/stock",[
-					"uses" => "mhuController@stockProduct",
-					"alias"=> "mhuController.stockProduct"
-				]);
-Route::get("/mr/mhu/boat",[
-					"uses" => "mhuController@boat",
-					"alias"=> "mhuController.Stock"
-				]);
-
+	Route::get("/stock",[
+						"uses" => "mhuController@stockProduct",
+						"alias"=> "mhuController.stockProduct"
+					]);
+	Route::get("/boat",[
+						"uses" => "mhuController@boat",
+						"alias"=> "mhuController.Stock"
+					]);
+});
 
 Route::get("/cron/job/interval/time",[
 					"uses" => "monitorController@intervalTime",
@@ -844,3 +845,79 @@ Route::get('/cek/server',
                         function(){
 													return ["success"=>true];
 												});
+Route::group(['prefix' => '/pln/form/barging'], function () {
+	Route::get('/',[
+						"uses" => "monitorController@plnBarging",
+						"alias"=> "monitor.plnBarging"
+					]);
+	Route::get('/q-{dataID}',[
+						"uses" => "monitorController@edit_pln_Barging",
+						"alias"=> "monitor.edit_pln_Barging"
+					]);
+	Route::post('/q-{dataID}',[
+						"uses" => "monitorController@update_pln_Barging",
+						"alias"=> "monitor.update_pln_Barging"
+					]);
+	Route::get('/delete-{dataID}',[
+						"uses" => "monitorController@delete_pln_Barging",
+						"alias"=> "monitor.delete_pln_Barging"
+					]);
+	Route::get('/undo-{dataID}',[
+						"uses" => "monitorController@undo_pln_Barging",
+						"alias"=> "monitor.undo_pln_Barging"
+					]);
+	Route::get("/check",[
+						"uses" => "monitorController@cek_br_pln",
+						"alias"=> "monitor.cek_br_pln"
+					]);
+	Route::post('/',[
+						"uses" => "monitorController@plnBarging_POST",
+						"alias"=> "monitor.plnBarging_POST"
+					]);
+			});
+Route::group(['prefix' => '/mr/pln'], function () {
+	Route::get("/barging",[
+						"uses" => "monSRController@barging",
+						"alias"=> "monSRController.barging"
+					]);
+	Route::get("/barging/monthly",[
+						"uses" => "monSRController@bargeMonthly",
+						"alias"=> "monSRController.bargeMonthly"
+					]);
+	Route::get("/barging/ach",[
+						"uses" => "monSRController@bargeACH",
+						"alias"=> "monSRController.bargeACH"
+					]);
+	Route::get("/boat",[
+						"uses" => "monSRController@boat",
+						"alias"=> "monSRController.Stock"
+								]);
+});
+
+//FORM BOAT MHU
+Route::group(['prefix' => 'pln/form/boat'], function () {
+Route::get('/',[
+					"uses" => "monSRController@formBOAT",
+					"alias"=> "monSRController.formBOAT"
+				]);
+Route::post('/',[
+					"uses" => "monSRController@postBOAT",
+					"alias"=> "monSRController.postBOAT"
+				]);
+Route::get('/q-{dataID}',[
+					"uses" => "monSRController@editBOAT",
+					"alias"=> "monSRController.editBOAT"
+				]);
+Route::post('/q-{dataID}',[
+					"uses" => "monSRController@updateBOAT",
+					"alias"=> "monSRController.updateBOAT"
+				]);
+Route::get('/delete-{dataID}',[
+					"uses" => "monSRController@deleteBOAT",
+					"alias"=> "monSRController.deleteBOAT"
+				]);
+Route::get('/undo-{dataID}',[
+					"uses" => "monSRController@undoBOAT",
+					"alias"=> "monSRController.undoBOAT"
+				]);
+});

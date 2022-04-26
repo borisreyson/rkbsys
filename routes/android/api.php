@@ -141,3 +141,7 @@ Route::post('android/api/hazard/rubah/metrik/resiko',[
         'uses'  => 'android\abpenergyController@updateResiko',
         'as'    => 'android.updateResiko'
 ]);
+Route::post('android/api/hazard/rubah/metode/pengendalian',[
+        'uses'  => 'android\abpenergyController@updatePengendalian',
+        'as'    => 'android.updatePengendalian'
+]);

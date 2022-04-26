@@ -84,17 +84,17 @@ class RouteServiceProvider extends ServiceProvider
              ->group(base_path('routes/web/sarana.php'));
         Route::middleware('web')
              ->namespace($this->namespace)
-             ->group(base_path('routes/web/rental.php'));             
+             ->group(base_path('routes/web/rental.php'));
         Route::middleware('web')
              ->namespace($this->namespace)
-             ->group(base_path('routes/web/absen.php'));          
+             ->group(base_path('routes/web/absen.php'));
         Route::middleware('web')
              ->namespace($this->namespace)
-             ->group(base_path('routes/android/api.php'));            
+             ->group(base_path('routes/android/api.php'));
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web/hse.php'));
-             
+
     }
 
     /**
@@ -113,11 +113,22 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
              ->middleware('api')
              ->namespace($this->namespace)
-             ->group(base_path('routes/api/android.php'));  
+             ->group(base_path('routes/api/android.php'));
         Route::prefix('api')
              ->middleware('api')
              ->namespace($this->namespace)
-             ->group(base_path('routes/flutter/api.php')); 
+             ->group(base_path('routes/flutter/api.php'));
+        Route::prefix('/api/v1')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/flutter/api_v1.php'));
+        // Route::group([
+        //      'middleware' => ['api', 'api_version:v1'],
+        //      'namespace'  => "{$this->apiNamespace}\V1",
+        //      'prefix'     => 'api/v1',
+        //  ], function ($router) {
+        //      require base_path('routes/flutter/api_v1.php');
+        //  });
     }
 
     /**
